@@ -2,7 +2,7 @@
 create table roomtypes(
 roomtypeid int primary key, 
 Type varchar(16),
-multiplier decimal(2,2));
+multiplier decimal(4,2));
 create table rooms(
 roomid int primary key,
 hotelid int,
@@ -14,7 +14,7 @@ foreign key (roomtypeid) references roomtypes(roomtypeid)
 create table amenities(
 id int primary key,
 amenity_name varchar(32),
-cost decimal(2,2)
+cost decimal(4,2)
 );
 create table users(
 userid int primary key,
@@ -25,7 +25,10 @@ rewards int
 );
 create table hotels(
 hotelid int primary key,
-hotelname varchar(32)
+hotelname varchar(32),
+address varchar(64),
+country varchar(32),
+stars decimal(4,2)
 );
 create table bookings(
 bookingid int primary key,
