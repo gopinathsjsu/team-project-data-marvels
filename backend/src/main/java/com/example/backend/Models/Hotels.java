@@ -12,4 +12,10 @@ public class Hotels {
     private Integer hotelid;
 
     private String hotelname;
+
+    private String Address;
+
+    private String Country;
+
+    private Float stars;
 }
