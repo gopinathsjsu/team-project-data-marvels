@@ -3,6 +3,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 
 import Login from './component/login';
 import Signup from './component/signup';
+import Home from '../home'
 
 function Auth(props) {
     const location = useLocation();
@@ -19,7 +20,7 @@ function Auth(props) {
                 <Signup />
             </Route>
             <Route path='/'>
-                <Login />
+                <Home />
             </Route>
         </Switch>
     )
