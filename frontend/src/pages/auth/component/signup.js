@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Container, Typography, Box, Grid, Link, TextField, Button, CssBaseline } from '@mui/material/';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Elements from '../../../common/Element';
+import { NavLink } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -94,9 +95,9 @@ export default function SignUp() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <NavLink to="/" variant="body2">
                                     Already have an account? Sign in
-                                </Link>
+                                </NavLink>
                             </Grid>
                         </Grid>
                     </Box>

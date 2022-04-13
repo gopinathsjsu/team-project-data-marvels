@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, TextField, Typography, Link } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
+import {NavLink} from 'react-router-dom';
 
 export default function Login() {
   return (
@@ -23,7 +24,7 @@ export default function Login() {
       <Typography variant="caption" display="block" gutterBottom>
         New User ?
       </Typography>
-      <Link href="#">SignUp</Link>
+      <NavLink to="/signup">SignUp</NavLink>
     </>
   )
 }
