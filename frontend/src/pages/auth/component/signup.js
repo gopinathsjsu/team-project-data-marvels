@@ -21,6 +21,14 @@ export default function SignUp() {
         setVal(temp)
     }
 
+    function register(e) {
+        e.preventDefault();
+        let data = {
+            ...val
+        }
+        console.log(data);
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
@@ -36,7 +44,7 @@ export default function SignUp() {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate sx={{ mt: 3 }}>
+                    <Box component="form" noValidate sx={{ mt: 3 }} onSubmit={(e) => register(e)} id="register">
                         <Grid container spacing={2}>
                             <Grid item xs={12} >
                                 <Elements
@@ -90,6 +98,7 @@ export default function SignUp() {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            form="register"
                         >
                             Sign Up
                         </Button>
