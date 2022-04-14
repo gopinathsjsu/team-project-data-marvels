@@ -1,17 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
-import { Container, Button, TextField, Typography, Box, Grid, Link, 
-        Card, InputAdornment, IconButton, CssBaseline } from '@mui/material';
-import {Visibility, VisibilityOff} from '@mui/icons-material/';
+import { Container, Button, TextField, Typography, Box, Grid, Card, InputAdornment, IconButton, CssBaseline } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material/';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import API from "../../../helper/api";
 
 const theme = createTheme();
 
 export default function Login() {
   const [val, setVal] = useState({
     email: "",
-    password:"",
+    password: "",
     showPassword: false,
   })
 
@@ -24,8 +24,18 @@ export default function Login() {
   function login(e) {
     e.preventDefault();
     let data = {
-        ...val
+      ...val
     }
+    API({
+      callURL: "",
+      callMethod: "GET",
+      urlParams: {},
+      bodyData: data,
+      headers: {},
+      callBack: (res) => {
+        console.log(res);
+      }
+    })
     console.log(data);
   }
 
@@ -37,15 +47,17 @@ export default function Login() {
   };
 
   const handleMouseDownPassword = (event) => {
-      event.preventDefault();
+    event.preventDefault();
   };
 
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth={false} sx={{ bgcolor: '#E7E5EA', height: '100vh', 
-                                                          display: 'flex', flexDirection: 'row',
-                                                          justifyContent: 'center'}}>
+      <Container component="main" maxWidth={false} sx={{
+        bgcolor: '#E7E5EA', height: '100vh',
+        display: 'flex', flexDirection: 'row',
+        justifyContent: 'center'
+      }}>
         <CssBaseline />
         <Card
           sx={{
@@ -59,27 +71,29 @@ export default function Login() {
             paddingLeft: 15,
             paddingRight: 15,
             marginTop: 10
-        }}>
+          }}>
           <Typography variant="h3"> Sign in</Typography>
-          <Box component="form" noValidate sx={{ mt: 3, display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'center', justifyContent: 'center' }} 
-                                                onSubmit={(e) => login(e)} id="login">
+          <Box component="form" noValidate sx={{
+            mt: 3, display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center', justifyContent: 'center'
+          }}
+            onSubmit={(e) => login(e)} id="login">
             <Grid container spacing={2}>
               <Grid item xs={12}>
-              <TextField 
-                name="email"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                autoFocus
-                autoComplete="email"
-                value={val.email}
-                onChange={(e) => onChange(e.target.value, "email")}/>
+                <TextField
+                  name="email"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  autoFocus
+                  autoComplete="email"
+                  value={val.email}
+                  onChange={(e) => onChange(e.target.value, "email")} />
               </Grid>
               <Grid item xs={12}>
-                <TextField 
+                <TextField
                   name="password"
                   required
                   fullWidth
@@ -91,28 +105,28 @@ export default function Login() {
                   value={val.password}
                   onChange={(e) => onChange(e.target.value, "password")}
                   endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {val.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }/>
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {val.showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  } />
               </Grid>
             </Grid>
             <Button variant="contained" type="submit"
-                    width= "auto" sx={{ mt: 3, mb: 2 }}
-                    form="login">SIGN IN</Button>
+              width="auto" sx={{ mt: 3, mb: 2 }}
+              form="login">SIGN IN</Button>
             <Grid container justifyContent="center">
               <Grid item>
                 <NavLink to="/signup"> New User? Sign Up</NavLink>
               </Grid>
             </Grid>
-            
+
           </Box>
         </Card>
       </Container>
