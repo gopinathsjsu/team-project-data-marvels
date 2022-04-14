@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@mui/material/';
+import { Grid, TextField } from '@mui/material/';
 
 function Elements(props) {
     function formElement(elementObj) {
@@ -9,18 +9,20 @@ function Elements(props) {
             // case "date":
             case "text":
                 return (
-                    <TextField
-                        autoComplete="given-name"
-                        name={elementObj.id}
-                        required={elementObj.required}
-                        fullWidth
-                        id={elementObj.id}
-                        label={elementObj.label}
-                        autoFocus
-                        value={elementObj.value}
-                        onChange={(e) => elementObj.onchange(e.target.value, elementObj.id)}
-                        type={elementObj.type}
-                    />
+                    <Grid item xs={12}>
+                        <TextField
+                            autoComplete="given-name"
+                            name={elementObj.id}
+                            required={elementObj.required === null ? false : elementObj.required}
+                            fullWidth={elementObj.fullWidth === null ? false : elementObj.fullWidth}
+                            id={elementObj.id}
+                            label={elementObj.label}
+                            autoFocus={elementObj.autoFocus === null ? false : elementObj.autoFocus}
+                            value={elementObj.value}
+                            onChange={(e) => elementObj.onchange(e.target.value, elementObj.id)}
+                            type={elementObj.type}
+                        />
+                    </Grid>
                 )
         }
     }
