@@ -27,7 +27,7 @@ export default function SignUp() {
     }
 
     return (
-        <div className='d-flex flex-row justify-content-center align-items-center' style={{ background: '#E7E5EA', height: '100vh' }}>
+        <div className=' container d-flex flex-row justify-content-center align-items-center' style={{ height: '100vh' }}>
             <div className='card col-5 shadow p-3' id='register_container'>
                 <form id='register_form' onSubmit={(e) => register(e)}>
                     <h1 className='d-flex flex-row justify-content-center mb-4 fw-normal'>Sign up</h1>

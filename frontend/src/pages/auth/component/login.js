@@ -36,7 +36,7 @@ export default function Login() {
 	}
 
 	return (
-		<div className='d-flex flex-row justify-content-center align-items-center' style={{ background: '#E7E5EA', height: '100vh' }}>
+		<div className='container d-flex flex-row justify-content-center align-items-center' style={{ height: '100vh' }}>
 			<div className='card col-5 shadow p-3' id='login_container'>
 				<form onSubmit={(e) => login(e)}>
 					<h1 className='d-flex flex-row justify-content-center mb-4 fw-normal'> Log in</h1>

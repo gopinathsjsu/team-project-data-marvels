@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 function Elements(props) {
     function formElement(elementObj) {
@@ -13,15 +14,10 @@ function Elements(props) {
                         key={elementObj.id}
                         className={
                             elementObj.className !== undefined
-                                ? 'form-group mb-3 ' + elementObj.className
-                                : 'form-group mb-3'
+                                ? 'form-floating mb-3 ' + elementObj.className
+                                : 'form-floating mb-3'
                         }
                     >
-                        {elementObj.label ? (
-                            <label htmlFor={elementObj.id} className='form-label w-100 text-left'>
-                                {elementObj.label}
-                            </label>
-                        ) : null}
                         <input
                             type={elementObj.type}
                             id={elementObj.id}
@@ -38,6 +34,11 @@ function Elements(props) {
                                 'form-control-lg': elementObj.size === 'lg',
                             })}
                         />
+                        {elementObj.label ? (
+                            <label htmlFor={elementObj.id} className='ms-2'>
+                                {elementObj.label}
+                            </label>
+                        ) : null}
                     </div>
                 )
             case 'number':
@@ -46,15 +47,10 @@ function Elements(props) {
                         key={elementObj.id}
                         className={
                             elementObj.className !== undefined
-                                ? 'form-group ' + elementObj.className
-                                : 'form-group'
+                                ? 'form-floating mb-3 ' + elementObj.className
+                                : 'form-floating'
                         }
                     >
-                        {elementObj.label ? (
-                            <label htmlFor={elementObj.id} className='w-100 text-left'>
-                                {elementObj.label}
-                            </label>
-                        ) : null}
                         <input
                             type={elementObj.type}
                             id={elementObj.id}
@@ -73,6 +69,36 @@ function Elements(props) {
                                 'form-control-lg': elementObj.size === 'lg',
                             })}
                         />
+                        {elementObj.label ? (
+                            <label htmlFor={elementObj.id} className='ms-2'>
+                                {elementObj.label}
+                            </label>
+                        ) : null}
+                    </div>
+                )
+            case 'datepicker':
+                return (
+                    <div
+                        key={elementObj.id}
+                        className={
+                            elementObj.className !== undefined
+                                ? 'form-floating mb-3 ' + elementObj.className
+                                : 'form-floating'
+                        }
+                    >
+                        <DateRangePicker
+                            initialSettings={{ startDate: '05/10/2022', endDate: '05/15/2022' }}
+                        >
+                            <input
+                                id={elementObj.id}
+                                name={elementObj.id}
+                                type="text"
+                                style={{ width: 'auto' }}
+                                className={classnames('form-control py-0', {
+                                    'form-control-sm': elementObj.size === 'sm',
+                                    'form-control-lg': elementObj.size === 'lg',
+                                })} />
+                        </DateRangePicker>
                     </div>
                 )
         }
