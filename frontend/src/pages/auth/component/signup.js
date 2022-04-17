@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { Container, Typography, Box, Grid, Button, CssBaseline, Card } from '@mui/material/';
-import Elements from '../../../common/Element';
+import React, { useState } from 'react';
+import Elements from '../../../common/component/Element';
+import Button from '../../../common/component/Button';
 import { NavLink } from 'react-router-dom';
 
 export default function SignUp() {
@@ -10,8 +9,7 @@ export default function SignUp() {
         firstName: "",
         lastName: "",
         email: "",
-        password: "",
-        showPassword: false,
+        password: ""
     })
 
     function onchange(newval, id) {
@@ -29,97 +27,74 @@ export default function SignUp() {
     }
 
     return (
-        <Container component="main" maxWidth={false} sx={{
-            bgcolor: '#E7E5EA', height: '100vh',
-            display: 'flex', flexDirection: 'row',
-            justifyContent: 'center'
-        }}>
-            <CssBaseline />
-            <Card
-                sx={{
-                    maxWidth: 600,
-                    height: 'fit-content',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    paddingTop: 6,
-                    paddingBottom: 6,
-                    paddingLeft: 15,
-                    paddingRight: 15,
-                    marginTop: 10
-                }}
-            >
-                <Typography variant="h3">Sign up</Typography>
-                <Box component="form" noValidate sx={{
-                    mt: 3, display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center', justifyContent: 'center'
-                }}
-                    onSubmit={(e) => register(e)} id="register">
-                    <Grid container spacing={2}>
+        <div className='p-3 text-center' id='register_container'>
+            <form id='register_form' onSubmit={(e) => register(e)}>
+                <h3 className='mb-3'>Sign up</h3>
+
+                <div className='row'>
                         <Elements
                             formField={[
                                 {
-                                    type: "text",
-                                    id: "firstName",
-                                    label: "First Name",
+                                    id: 'firstName',
+                                    type: 'text',
+                                    placeholder: 'First Name *',
+                                    autoFocus: true,
+                                    requiredFlag: true,
                                     value: val.firstName,
-                                    autoFocus: true,
-                                    required: true,
-                                    fullWidth: true,
                                     onchange: onchange
                                 },
                                 {
-                                    type: "text",
-                                    id: "lastName",
-                                    label: "Last Name",
+                                    id: 'lastName',
+                                    type: 'text',
+                                    placeholder: 'Last Name *',
+                                    requiredFlag: true,
                                     value: val.lastName,
-                                    autoFocus: true,
-                                    required: true,
-                                    fullWidth: true,
                                     onchange: onchange
                                 },
                                 {
-                                    type: "text",
-                                    id: "email",
-                                    label: "Email Address",
+                                    id: 'email',
+                                    type: 'email',
+                                    placeholder: 'Email ID *',
+                                    requiredFlag: true,
                                     value: val.email,
-                                    autoFocus: true,
-                                    required: true,
-                                    fullWidth: true,
                                     onchange: onchange
                                 },
                                 {
-                                    type: "password",
-                                    id: "password",
-                                    label: "Password",
+                                    id: 'password',
+                                    type: 'password',
+                                    placeholder: 'Password *',
+                                    requiredFlag: true,
                                     value: val.password,
-                                    autoFocus: true,
-                                    required: true,
-                                    fullWidth: true,
                                     onchange: onchange
-                                }
+                                },
+                                {
+                                    id: 'conf_password',
+                                    type: 'password',
+                                    placeholder: 'Re-Enter Password *',
+                                    requiredFlag: true,
+                                    value: val.conf_password,
+                                    onchange: onchange
+                                },
                             ]}
                         />
-                    </Grid>
-                    <Button
-                        type="submit"
-                        width="auto"
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        form="register"
-                    >
-                        SIGN UP
-                    </Button>
-                    <Grid container justifyContent="center">
-                        <Grid item>
-                            <NavLink to="/login">
-                                Already have an account? Sign in
-                            </NavLink>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </Card>
-        </Container>
+                </div>
+                <Button
+                    text={<span className='font-14 m-0'>Sign Up</span>}
+                    type='submit'
+                    // loading={loading}
+                    className='px-3 py-1 mt-3'
+                    form='register_form'
+                />
+            </form>
+
+            <div className='pt-4 pb-3 text-center' style={{ color: '#666666' }}>
+                <p className='mb-0'>
+                    Already have an account?
+                    <NavLink to='/login' className='text-primary ms-2'>
+                        Log In
+                    </NavLink>
+                </p>
+            </div>
+        </div>
     );
 }
