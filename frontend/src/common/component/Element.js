@@ -13,12 +13,12 @@ function Elements(props) {
                         key={elementObj.id}
                         className={
                             elementObj.className !== undefined
-                                ? 'form-group ' + elementObj.className
-                                : 'form-group'
+                                ? 'form-group mb-3 ' + elementObj.className
+                                : 'form-group mb-3'
                         }
                     >
                         {elementObj.label ? (
-                            <label htmlFor={elementObj.id} className='w-100 text-left'>
+                            <label htmlFor={elementObj.id} className='form-label w-100 text-left'>
                                 {elementObj.label}
                             </label>
                         ) : null}

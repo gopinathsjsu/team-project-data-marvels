@@ -27,18 +27,21 @@ export default function SignUp() {
     }
 
     return (
-        <div className='p-3 text-center' id='register_container'>
-            <form id='register_form' onSubmit={(e) => register(e)}>
-                <h3 className='mb-3'>Sign up</h3>
+        <div className='d-flex flex-row justify-content-center align-items-center' style={{ background: '#E7E5EA', height: '100vh' }}>
+            <div className='card col-5 shadow p-3' id='register_container'>
+                <form id='register_form' onSubmit={(e) => register(e)}>
+                    <h1 className='d-flex flex-row justify-content-center mb-4 fw-normal'>Sign up</h1>
 
-                <div className='row'>
+                    <div className='row justify-content-center'>
                         <Elements
                             formField={[
                                 {
                                     id: 'firstName',
                                     type: 'text',
-                                    placeholder: 'First Name *',
+                                    label: 'First Name *',
+                                    placeholder: 'First Name',
                                     autoFocus: true,
+                                    className: 'col-7',
                                     requiredFlag: true,
                                     value: val.firstName,
                                     onchange: onchange
@@ -46,7 +49,9 @@ export default function SignUp() {
                                 {
                                     id: 'lastName',
                                     type: 'text',
-                                    placeholder: 'Last Name *',
+                                    label: 'Last Name *',
+                                    placeholder: 'Last Name',
+                                    className: 'col-7',
                                     requiredFlag: true,
                                     value: val.lastName,
                                     onchange: onchange
@@ -54,7 +59,9 @@ export default function SignUp() {
                                 {
                                     id: 'email',
                                     type: 'email',
-                                    placeholder: 'Email ID *',
+                                    placeholder: 'Email ID',
+                                    label: 'Email *',
+                                    className: 'col-7',
                                     requiredFlag: true,
                                     value: val.email,
                                     onchange: onchange
@@ -62,39 +69,37 @@ export default function SignUp() {
                                 {
                                     id: 'password',
                                     type: 'password',
-                                    placeholder: 'Password *',
+                                    placeholder: 'Password',
+                                    label: 'Password *',
+                                    className: 'col-7',
                                     requiredFlag: true,
                                     value: val.password,
                                     onchange: onchange
                                 },
-                                {
-                                    id: 'conf_password',
-                                    type: 'password',
-                                    placeholder: 'Re-Enter Password *',
-                                    requiredFlag: true,
-                                    value: val.conf_password,
-                                    onchange: onchange
-                                },
                             ]}
                         />
-                </div>
-                <Button
-                    text={<span className='font-14 m-0'>Sign Up</span>}
-                    type='submit'
-                    // loading={loading}
-                    className='px-3 py-1 mt-3'
-                    form='register_form'
-                />
-            </form>
+                    </div>
+                    <div className='d-flex justify-content-center'>
+                        <Button
+                            text={<span className='font-14 m-0'>Sign Up</span>}
+                            type='submit'
+                            // loading={loading}
+                            className='px-3 py-1'
+                            form='register_form'
+                        />
+                    </div>
+                </form>
 
-            <div className='pt-4 pb-3 text-center' style={{ color: '#666666' }}>
-                <p className='mb-0'>
-                    Already have an account?
-                    <NavLink to='/login' className='text-primary ms-2'>
-                        Log In
-                    </NavLink>
-                </p>
+                <div className='d-flex justify-content-center pt-4 pb-3' style={{ color: '#666666' }}>
+                    <p className='mb-0'>
+                        Already have an account?
+                        <NavLink to='/login' className='text-primary ms-2'>
+                            Log In
+                        </NavLink>
+                    </p>
+                </div>
             </div>
         </div>
+
     );
 }

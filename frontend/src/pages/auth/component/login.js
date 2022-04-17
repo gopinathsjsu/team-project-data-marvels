@@ -36,40 +36,30 @@ export default function Login() {
 	}
 
 	return (
-		<>
-			<form className='p-3' onSubmit={(e) => login(e)}>
-				<div className='row'>
-					<div className='col'>
-						<div className='text-center p-3'>
-							<h3 className='mb-3'> Log in</h3>
-						</div>
-					</div>
-				</div>
-				<div className='row'>
-					<Elements
-						formField={[
-							{
-								id: 'email',
-								label: 'Email ID*',
-								type: 'email',
-								placeholder: 'Enter Registered Email ID',
-								autoFocus: true,
-								requiredFlag: true,
-								value: val.email,
-								onchange: onchange,
-							},
-						]}
-					/>
-				</div>
-				<div className='row'>
-					<div className='col'>
+		<div className='d-flex flex-row justify-content-center align-items-center' style={{ background: '#E7E5EA', height: '100vh' }}>
+			<div className='card col-5 shadow p-3' id='login_container'>
+				<form onSubmit={(e) => login(e)}>
+					<h1 className='d-flex flex-row justify-content-center mb-4 fw-normal'> Log in</h1>
+					<div className='row justify-content-center'>
 						<Elements
 							formField={[
+								{
+									id: 'email',
+									label: 'Email ID *',
+									type: 'email',
+									placeholder: 'Enter Registered Email ID',
+									className: 'col-7',
+									autoFocus: true,
+									requiredFlag: true,
+									value: val.email,
+									onchange: onchange,
+								},
 								{
 									id: 'password',
 									label: 'Password *',
 									type: 'password',
-									placeholder: 'Password',
+									placeholder: 'Enter Password',
+									className: 'col-7',
 									requiredFlag: true,
 									value: val.password,
 									onchange: onchange
@@ -77,25 +67,23 @@ export default function Login() {
 							]}
 						/>
 					</div>
-				</div>
-				<div className='text-center'>
-					<Button
-						text='Login'
-						type='submit'
-						className='px-3 py-1 mt-2'
+					<div className='d-flex justify-content-center'>
+						<Button
+							text='Login'
+							type='submit'
 						// loading={loading}
-					/>
+						/>
+					</div>
+				</form>
+				<div className='d-flex justify-content-center pt-3 pb-3' style={{ color: '#666666' }}>
+					<p className='mb-0'>
+						Don't have an account?
+						<NavLink to='/signup' className='text-primary ms-2'>
+							Register
+						</NavLink>
+					</p>
 				</div>
-			</form>
-
-			<div className='mx-3 my-1 text-center' style={{ color: '#666666' }}>
-				<p className='mb-0'>
-					Don't have an account?
-					<NavLink to='/signup' className='text-primary ms-2'>
-						Register
-					</NavLink>
-				</p>
 			</div>
-		</>
+		</div>
 	)
 }
