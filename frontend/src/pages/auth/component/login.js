@@ -1,106 +1,101 @@
-import React from 'react';
-import { useState } from 'react';
-import { Container, Button, Typography, Box, Grid, Card, CssBaseline } from '@mui/material';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import API from "../../../helper/api";
-import Elements from '../../../common/Element';
+import API from "../../../common/helper/api";
+import Elements from '../../../common/component/Element';
+import Button from '../../../common/component/Button';
 
 
 export default function Login() {
-  const [val, setVal] = useState({
-    email: "",
-    password: "",
-    showPassword: false,
-  })
+	const [val, setVal] = useState({
+		email: "",
+		password: ""
+	})
 
-  function onchange(newval, id) {
-    let temp = { ...val }
-    temp[id] = newval
-    setVal(temp)
-  }
+	function onchange(newval, id) {
+		let temp = { ...val }
+		temp[id] = newval
+		setVal(temp)
+	}
 
-  function login(e) {
-    e.preventDefault();
-    let data = {
-      ...val
-    }
-    // API({
-    //   callURL: "",
-    //   callMethod: "GET",
-    //   urlParams: {},
-    //   bodyData: data,
-    //   headers: {},
-    //   callBack: (res) => {
-    //     console.log(res);
-    //   }
-    // })
-    console.log(data);
-  }
+	function login(e) {
+		e.preventDefault();
+		let data = {
+			...val
+		}
+		// API({
+		//   callURL: "",
+		//   callMethod: "GET",
+		//   urlParams: {},
+		//   bodyData: data,
+		//   headers: {},
+		//   callBack: (res) => {
+		//     console.log(res);
+		//   }
+		// })
+		console.log(data);
+	}
 
-  return (
-    <Container component="main" maxWidth={false} sx={{
-      bgcolor: '#E7E5EA', height: '100vh',
-      display: 'flex', flexDirection: 'row',
-      justifyContent: 'center'
-    }}>
-      <CssBaseline />
-      <Card
-        sx={{
-          maxWidth: 600,
-          height: 'fit-content',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          paddingTop: 6,
-          paddingBottom: 6,
-          paddingLeft: 15,
-          paddingRight: 15,
-          marginTop: 10
-        }}>
-        <Typography variant="h3"> Sign in</Typography>
-        <Box component="form" noValidate sx={{
-          mt: 3, display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center'
-        }}
-          onSubmit={(e) => login(e)} id="login">
-          <Grid container spacing={2}>
-            <Elements
-              formField={[
-                {
-                  type: "email",
-                  id: "email",
-                  label: "Email Address",
-                  value: val.email,
-                  fullWidth: true,
-                  required: true,
-                  autoFocus: true,
-                  onchange: onchange
-                },
-                {
-                  type: "password",
-                  id: "password",
-                  label: "Password",
-                  value: val.password,
-                  autoFocus: true,
-                  required: true,
-                  fullWidth: true,
-                  onchange: onchange
-                }
-              ]}
-            />
-          </Grid>
-          <Button variant="contained" type="submit"
-            width="auto" sx={{ mt: 3, mb: 2 }}
-            form="login">SIGN IN</Button>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <NavLink to="/signup"> New User? Sign Up</NavLink>
-            </Grid>
-          </Grid>
+	return (
+		<>
+			<form className='p-3' onSubmit={(e) => login(e)}>
+				<div className='row'>
+					<div className='col'>
+						<div className='text-center p-3'>
+							<h3 className='mb-3'> Log in</h3>
+						</div>
+					</div>
+				</div>
+				<div className='row'>
+					<Elements
+						formField={[
+							{
+								id: 'email',
+								label: 'Email ID*',
+								type: 'email',
+								placeholder: 'Enter Registered Email ID',
+								autoFocus: true,
+								requiredFlag: true,
+								value: val.email,
+								onchange: onchange,
+							},
+						]}
+					/>
+				</div>
+				<div className='row'>
+					<div className='col'>
+						<Elements
+							formField={[
+								{
+									id: 'password',
+									label: 'Password *',
+									type: 'password',
+									placeholder: 'Password',
+									requiredFlag: true,
+									value: val.password,
+									onchange: onchange
+								},
+							]}
+						/>
+					</div>
+				</div>
+				<div className='text-center'>
+					<Button
+						text='Login'
+						type='submit'
+						className='px-3 py-1 mt-2'
+						// loading={loading}
+					/>
+				</div>
+			</form>
 
-        </Box>
-      </Card>
-    </Container>
-  )
+			<div className='mx-3 my-1 text-center' style={{ color: '#666666' }}>
+				<p className='mb-0'>
+					Don't have an account?
+					<NavLink to='/signup' className='text-primary ms-2'>
+						Register
+					</NavLink>
+				</p>
+			</div>
+		</>
+	)
 }
