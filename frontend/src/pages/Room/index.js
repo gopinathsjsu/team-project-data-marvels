@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-// import { TextField, Grid, Box } from '@mui/material';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-// import Elements from '../../common/Element';
+import logo from './img/ActivityDiagram.jpeg'
+import Elements from '../../common/component/Element';
+import Button from '../../common/component/Button';
+import { Numbers } from '../../common/component/options';
 
 function Room() {
 
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-
     const [val, setVal] = useState({
-        noOfGuests: 0,
-        noOfRooms: 0
+        startDate: '2022-05-05',
+        endDate: '2022-05-06',
+        noOfGuests: { label: 2 },
+        noOfRooms: { label: 1 }
     })
 
     function onchange(newval, id) {
@@ -21,8 +19,110 @@ function Room() {
         setVal(temp)
     }
 
+    function submit(e) {
+        e.preventDefault();
+        let data = {
+            ...val
+        }
+        console.log(data);
+    }
+
     return (
-        <p>Room Page</p>
+        <div className='container-fluid h-100'>
+            <div className='row' style={{ height: '100vh', maxHeight: '100vh' }}>
+                <div
+                    className='col-md-5 px-4 py-5'
+                    style={{ height: '100vh', maxHeight: '100vh' }}
+                >
+                    <div className='d-flex flex-column justify-content-center h-100'>
+                        <span>
+                            <div className='text-center mb-4'>
+                                <h4> Hotel Name </h4>
+                                <h5> city </h5>
+                            </div>
+                            <div className='text-center mb-4'>
+                                <img width='280' src={logo} alt='logo' />
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div
+                    className='col-md-7 overflow-auto'
+                    style={{ height: '100vh', maxHeight: '100vh', background: '#f7f7f7' }}
+                >
+                    <div className='d-flex flex-column justify-content-center h-100'>
+                        <form onSubmit={(e) => submit(e)}>
+                            <div className='text-center mb-4'>
+                                <h4> Room Type </h4>
+                                <div className='row'>
+                                    <div className='col-md-6'>
+                                        <Elements formField={[{
+                                            id: 'startDate',
+                                            type: 'date',
+                                            label: 'Check In',
+                                            requiredFlag: true,
+                                            autoFocus: true,
+                                            value: val.startDate,
+                                            onchange: onchange
+                                        }]} />
+                                    </div>
+                                    <div className='col-md-6'>
+                                        <Elements formField={[{
+                                            id: 'endDate',
+                                            type: 'date',
+                                            label: 'Check Out',
+                                            requiredFlag: true,
+                                            autoFocus: true,
+                                            value: val.endDate,
+                                            onchange: onchange
+                                        }]} />
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-md-6'>
+                                        <Elements formField={[
+                                            {
+                                                id: 'noOfRooms',
+                                                label: 'Number of Rooms',
+                                                type: 'react_select',
+                                                autoFocus: true,
+                                                requiredFlag: true,
+                                                value: val.noOfRooms,
+                                                options: Numbers,
+                                                valueKey: 'label',
+                                                onchange: onchange
+                                            }
+                                        ]} />
+                                    </div>
+                                    <div className='col-md-6'>
+                                        <Elements formField={[
+                                            {
+                                                id: 'noOfGuests',
+                                                label: 'Number of Guests',
+                                                type: 'react_select',
+                                                autoFocus: true,
+                                                requiredFlag: true,
+                                                value: val.noOfGuests,
+                                                options: Numbers,
+                                                valueKey: 'label',
+                                                onchange: onchange
+                                            }
+                                        ]} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='d-flex justify-content-center'>
+                                <Button
+                                    text='Book'
+                                    type='submit'
+                                // loading={loading}
+                                />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         // <Box
         //     sx={{
         //         display: 'flex',
