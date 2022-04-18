@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import DateRangePicker from 'react-bootstrap-daterangepicker';
+import Select from 'react-select';
 
 function Elements(props) {
     function formElement(elementObj) {
@@ -26,7 +26,7 @@ function Elements(props) {
                             value={elementObj.value}
                             form={elementObj.form !== undefined ? elementObj.form : null}
                             disabled={elementObj.disabled !== undefined ? elementObj.disabled : false}
-                            required={elementObj.required !== undefined ? elementObj.required : false}
+                            required={elementObj.requiredFlag !== undefined ? elementObj.requiredFlag : false}
                             autoFocus={elementObj.autoFocus ? elementObj.autoFocus : null}
                             onChange={(e) => elementObj.onchange(e.target.value, elementObj.id)}
                             className={classnames('form-control', {
@@ -76,31 +76,72 @@ function Elements(props) {
                         ) : null}
                     </div>
                 )
-            case 'datepicker':
-                return (
-                    <div
-                        key={elementObj.id}
-                        className={
-                            elementObj.className !== undefined
-                                ? 'form-floating mb-3 ' + elementObj.className
-                                : 'form-floating'
-                        }
-                    >
-                        <DateRangePicker
-                            initialSettings={{ startDate: '05/10/2022', endDate: '05/15/2022' }}
+                case 'react_select':
+                    return (
+                        <div
+                            className={
+                                elementObj.className !== undefined
+                                    ? 'form-group w-100 ' + elementObj.className
+                                    : 'form-group w-100'
+                            }
+                            key={elementObj.id}
                         >
-                            <input
+                            {elementObj.label !== undefined ? (
+                                <label className='w-100 text-left'>{elementObj.label}</label>
+                            ) : null}
+                            <Select
                                 id={elementObj.id}
-                                name={elementObj.id}
-                                type="text"
-                                style={{ width: 'auto' }}
-                                className={classnames('form-control py-0', {
-                                    'form-control-sm': elementObj.size === 'sm',
-                                    'form-control-lg': elementObj.size === 'lg',
-                                })} />
-                        </DateRangePicker>
-                    </div>
-                )
+                                value={elementObj.value}
+                                isSearchable={
+                                    elementObj.isSearchable !== undefined ? elementObj.isSearchable : true
+                                }
+                                options={elementObj.options}
+                                className='w-100'
+                                isMulti={elementObj.isMulti !== undefined ? elementObj.isMulti : false}
+                                onChange={(val) => elementObj.onchange(val, elementObj.id)}
+                                getOptionLabel={
+                                    elementObj.labelKey
+                                        ? (option) => option[elementObj.labelKey]
+                                        : (option) => option.label
+                                }
+                                getOptionValue={
+                                    elementObj.valueKey
+                                        ? (option) => option[elementObj.valueKey]
+                                        : (option) => option.value
+                                }
+                                placeholder={
+                                    elementObj.placeholder !== undefined ? elementObj.placeholder : ''
+                                }
+                                isDisabled={
+                                    elementObj.disabled !== undefined ? elementObj.disabled : false
+                                }
+                                isLoading={elementObj.loading !== undefined ? elementObj.loading : false}
+                                defaultValue={
+                                    elementObj.defaultValue !== undefined ? elementObj.defaultValue : ''
+                                }
+                                styles={
+                                    elementObj.styles
+                                        ? {
+                                                ...elementObj.styles,
+                                                menuList: (provided, state) => ({
+                                                    ...provided,
+                                                    position: 'absolute',
+                                                    background: 'white',
+                                                    width: document.getElementById(elementObj.id).offsetWidth,
+                                                }),
+                                          }
+                                        : {
+                                                menuList: (provided, state) => ({
+                                                    ...provided,
+                                                    position: 'absolute',
+                                                    background: 'white',
+                                                    width: document.getElementById(elementObj.id).offsetWidth,
+                                                }),
+                                          }
+                                }
+                            />
+                        </div>
+                    )
         }
     }
 
