@@ -48,7 +48,7 @@ function Elements(props) {
                         className={
                             element.className !== undefined
                                 ? 'form-floating mb-3 ' + element.className
-                                : 'form-floating'
+                                : 'form-floating mb-3'
                         }
                     >
                         <input

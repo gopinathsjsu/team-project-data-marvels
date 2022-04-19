@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import Elements from '../../../common/component/Element';
 import Button from '../../../common/component/Button';
 import { NavLink } from 'react-router-dom';
+import API from '../../../common/helper/api';
+import getLinks from '../../../common/helper/links';
 
 export default function SignUp() {
+    const links = getLinks();
+    const [loading, setLoading] = useState(false);
 
     const [val, setVal] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: ""
+        username: "Yash",
+        password: "test123",
+        phonenumber: "669204",
+        email: "yash@sjsu.edu"
     })
 
     function onchange(newval, id) {
@@ -20,10 +24,24 @@ export default function SignUp() {
 
     function register(e) {
         e.preventDefault();
+        setLoading(true);
+
         let data = {
             ...val
         }
-        console.log(data);
+
+        API({
+			callURL: links.sign_up,
+			callMethod: "POST",
+			bodyData: data,
+			// headers: {},
+            // urlParams: {},
+			callBack: (res) => {
+				console.log(res);
+			}
+		})
+
+        setLoading(false);
     }
 
     return (
@@ -36,34 +54,30 @@ export default function SignUp() {
                         <Elements
                             formField={[
                                 {
-                                    id: 'firstName',
-                                    type: 'text',
-                                    label: 'First Name *',
-                                    placeholder: 'First Name',
-                                    autoFocus: true,
-                                    className: 'col-7',
-                                    requiredFlag: true,
-                                    value: val.firstName,
-                                    onchange: onchange
-                                },
-                                {
-                                    id: 'lastName',
-                                    type: 'text',
-                                    label: 'Last Name *',
-                                    placeholder: 'Last Name',
-                                    className: 'col-7',
-                                    requiredFlag: true,
-                                    value: val.lastName,
-                                    onchange: onchange
-                                },
-                                {
                                     id: 'email',
                                     type: 'email',
                                     placeholder: 'Email ID',
                                     label: 'Email *',
-                                    className: 'col-7',
                                     requiredFlag: true,
                                     value: val.email,
+                                    onchange: onchange
+                                },
+                                {
+                                    id: 'username',
+                                    type: 'text',
+                                    label: 'Username *',
+                                    placeholder: 'Choose a username',
+                                    requiredFlag: true,
+                                    value: val.username,
+                                    onchange: onchange
+                                },
+                                {
+                                    id: 'phonenumber',
+                                    type: 'number',
+                                    placeholder: 'Mobile Number *',
+                                    label: 'Phone Number *',
+                                    requiredFlag: true,
+                                    value: val.phonenumber,
                                     onchange: onchange
                                 },
                                 {
@@ -71,7 +85,6 @@ export default function SignUp() {
                                     type: 'password',
                                     placeholder: 'Password',
                                     label: 'Password *',
-                                    className: 'col-7',
                                     requiredFlag: true,
                                     value: val.password,
                                     onchange: onchange
@@ -83,7 +96,7 @@ export default function SignUp() {
                         <Button
                             text={<span className='font-14 m-0'>Sign Up</span>}
                             type='submit'
-                            // loading={loading}
+                            loading={loading}
                             className='px-3 py-1'
                             form='register_form'
                         />
