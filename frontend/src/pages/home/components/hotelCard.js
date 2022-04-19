@@ -15,10 +15,6 @@ function HotelCards(props) {
                         <div className='d-flex flex-row justify-content-between mt-2 mb-3'>
                             <div className='col-8 d-flex flex-column'>
                                 <h5>{item.roomType}</h5>
-                                <div className='d-flex flex-row justify-content-start'>
-                                    <span>Bedrooms</span>
-                                    <span>, # Bathrooms</span>
-                                </div>
                             </div>
                             <div className='d-flex align-self-center'>
                                 <h4>{item.price}</h4>

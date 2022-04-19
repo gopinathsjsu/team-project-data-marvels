@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Elements from '../../common/component/Element';
 import Button from '../../common/component/Button';
-import logo from '../../assets/sample.jpg'
 import HotelCards from './components/hotelCard';
 
 function Home() {
@@ -71,33 +70,29 @@ function Home() {
                     data={[{
                         hotelName: 'Hotel Name',
                         city: 'City',
+                        img: '',
                         roomType: 'Room Type',
-                        roomNumbers: '2',
-                        bathroomNumbers: '1',
                         price: 'Price'
                     },
                     {
                         hotelName: 'Hotel Name',
                         city: 'City',
+                        img: '',
                         roomType: 'Room Type',
-                        roomNumbers: '2',
-                        bathroomNumbers: '1',
                         price: 'Price'
                     },
                     {
                         hotelName: 'Hotel Name',
                         city: 'City',
+                        img: '',
                         roomType: 'Room Type',
-                        roomNumbers: '2',
-                        bathroomNumbers: '1',
                         price: 'Price'
                     },
                     {
                         hotelName: 'Hotel Name',
                         city: 'City',
+                        img: '',
                         roomType: 'Room Type',
-                        roomNumbers: '2',
-                        bathroomNumbers: '1',
                         price: 'Price'
                     }]}
                 />
