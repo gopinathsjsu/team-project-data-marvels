@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WebPage from "./routes/Router";
+import Header from './common/Header'
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 ReactDOM.render(
   <React.StrictMode>
+    <Header/>
     <WebPage />
   </React.StrictMode>,
   document.getElementById('root')
