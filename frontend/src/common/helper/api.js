@@ -7,11 +7,13 @@ async function API(entity) {
     return axios({
         baseURL: entity.callURL,
         method: entity.callMethod,
-        params: { ...entity.urlParams },
-        data: JSON.stringify(entity["bodyData"]),
-        headers: { ...entity.headers }
+        data: entity.bodyData,
+        // params: { ...entity.urlParams },
+        // headers: { ...entity.headers }
     }).then((res) => {
         return entity.callBack(res.data);
+    }).catch((err) => {
+        return entity.callBack(err.response.data);
     })
 }
 

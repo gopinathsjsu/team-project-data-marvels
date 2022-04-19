@@ -3,13 +3,17 @@ import { NavLink } from 'react-router-dom';
 import API from "../../../common/helper/api";
 import Elements from '../../../common/component/Element';
 import Button from '../../../common/component/Button';
-
+import getLinks from '../../../common/helper/links';
 
 export default function Login() {
+	const links = getLinks()
+
+	const [loading, setLoading] = useState(false)
 	const [val, setVal] = useState({
-		email: "",
-		password: ""
-	})
+		username: "tharun",
+		password: "test123"
+	}
+	)
 
 	function onchange(newval, id) {
 		let temp = { ...val }
@@ -19,20 +23,24 @@ export default function Login() {
 
 	function login(e) {
 		e.preventDefault();
+		setLoading(true);
+
 		let data = {
 			...val
 		}
-		// API({
-		//   callURL: "",
-		//   callMethod: "GET",
-		//   urlParams: {},
-		//   bodyData: data,
-		//   headers: {},
-		//   callBack: (res) => {
-		//     console.log(res);
-		//   }
-		// })
-		console.log(data);
+
+		API({
+			callURL: links.login,
+			callMethod: "POST",
+			// urlParams: {},
+			bodyData: data,
+			// headers: {},
+			callBack: (res) => {
+				console.log(res);
+			}
+		})
+
+		setLoading(false);
 	}
 
 	return (
@@ -44,14 +52,13 @@ export default function Login() {
 						<Elements
 							formField={[
 								{
-									id: 'email',
-									label: 'Email ID *',
-									type: 'email',
-									placeholder: 'Enter Registered Email ID',
-									className: 'col-7',
+									id: 'username',
+									label: 'Username *',
+									type: 'text',
+									placeholder: 'Enter Username',
 									autoFocus: true,
 									requiredFlag: true,
-									value: val.email,
+									value: val.username,
 									onchange: onchange,
 								},
 								{
@@ -59,7 +66,6 @@ export default function Login() {
 									label: 'Password *',
 									type: 'password',
 									placeholder: 'Enter Password',
-									className: 'col-7',
 									requiredFlag: true,
 									value: val.password,
 									onchange: onchange
@@ -71,7 +77,7 @@ export default function Login() {
 						<Button
 							text='Login'
 							type='submit'
-						// loading={loading}
+							loading={loading}
 						/>
 					</div>
 				</form>
