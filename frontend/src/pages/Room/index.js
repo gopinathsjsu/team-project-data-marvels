@@ -10,7 +10,13 @@ function Room() {
         startDate: '2022-05-05',
         endDate: '2022-05-06',
         noOfGuests: { label: 2 },
-        noOfRooms: { label: 1 }
+        noOfRooms: { label: 1 },
+        ContinentalBreakfast: false,
+        swimmingPool: false,
+        meals: false,
+        rewards: false,
+        parking: false,
+        fitnessRoom: false
     })
 
     function onchange(newval, id) {
@@ -51,9 +57,9 @@ function Room() {
                     style={{ height: '100vh', maxHeight: '100vh', background: '#f7f7f7' }}
                 >
                     <div className='d-flex flex-column justify-content-center h-100'>
-                        <form onSubmit={(e) => submit(e)}>
+                        <form id='booking_form' onSubmit={(e) => submit(e)}>
                             <div className='text-center mb-4'>
-                                <h4> Room Type </h4>
+                                <h2> Room Type </h2>
                                 <div className='row'>
                                     <div className='col-md-6'>
                                         <Elements formField={[{
@@ -108,6 +114,69 @@ function Room() {
                                                 onchange: onchange
                                             }
                                         ]} />
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <h2> Amenities </h2>
+                                    <div className='col-md-6'>
+                                        <Elements
+                                            formField={[
+                                                {
+                                                    id: 'ContinentalBreakfast',
+                                                    type: 'checkbox',
+                                                    form: 'booking_form',
+                                                    value: val.ContinentalBreakfast,
+                                                    label: 'Daily Continental Breakfast',
+                                                    onchange: onchange,
+                                                },
+                                                {
+                                                    id: 'swimmingPool',
+                                                    type: 'checkbox',
+                                                    form: 'booking_form',
+                                                    value: val.swimmingPool,
+                                                    label: 'Access to Swimming Pool/Jacuzzi',
+                                                    onchange: onchange,
+                                                },
+                                                {
+                                                    id: 'meals',
+                                                    type: 'checkbox',
+                                                    form: 'booking_form',
+                                                    value: val.meals,
+                                                    label: 'All Meals (Breakfast, Lunch, Dinner)',
+                                                    onchange: onchange,
+                                                }
+                                            ]}
+                                        />
+                                    </div>
+                                    <div className='col-md-6'>
+                                        <Elements
+                                            formField={[
+                                                {
+                                                    id: 'fitnessRoom',
+                                                    type: 'checkbox',
+                                                    form: 'booking_form',
+                                                    value: val.fitnessRoom,
+                                                    label: 'Access to Fitness Room',
+                                                    onchange: onchange,
+                                                },
+                                                {
+                                                    id: 'parking',
+                                                    type: 'checkbox',
+                                                    form: 'booking_form',
+                                                    value: val.parking,
+                                                    label: 'Parking',
+                                                    onchange: onchange,
+                                                },
+                                                {
+                                                    id: 'rewards',
+                                                    type: 'checkbox',
+                                                    form: 'booking_form',
+                                                    value: val.rewards,
+                                                    label: 'Use Rewards',
+                                                    onchange: onchange,
+                                                }
+                                            ]}
+                                        />
                                     </div>
                                 </div>
                             </div>
