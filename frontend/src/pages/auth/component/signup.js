@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import Elements from '../../../common/component/Element';
-import Button from '../../../common/component/Button';
 import { NavLink } from 'react-router-dom';
-import API from '../../../common/helper/api';
-import getLinks from '../../../common/helper/links';
+import { Elements, Button, API, getLinks } from '../../../common';
 
 export default function SignUp() {
     const links = getLinks();

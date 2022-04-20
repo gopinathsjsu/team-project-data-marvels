@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../common/component/Button';
+import { Button } from '../../common/index';
 
 function Reservations() {
     return (

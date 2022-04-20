@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WebPage from './routes/Router';
-import Header from './common/Header'
+import { Header } from './common';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -16,6 +16,7 @@ let persistor = persistStore(store)
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
+      <Header />
       <WebPage />
     </PersistGate>
   </Provider>,

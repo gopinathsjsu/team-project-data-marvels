@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../common/component/Button';
+import { Button } from '../../common/index';
 
 function Cart() {
     return (
@@ -30,7 +30,7 @@ function Cart() {
                 </li>
             </ul>
             <div className='d-flex flex-row-reverse mt-4'>
-                <Button id='book' text='Book Now' className='ms-4'/>
+                <Button id='book' text='Book Now' className='ms-4' />
                 <h4>Total: $<span>Price</span></h4>
             </div>
         </div>

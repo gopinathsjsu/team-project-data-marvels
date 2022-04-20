@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import logo from './img/ActivityDiagram.jpeg'
-import Elements from '../../common/component/Element';
-import Button from '../../common/component/Button';
+import { Elements, Button } from '../../common/index';
 import { Numbers } from '../../common/component/options';
 
 function Room() {

@@ -2,8 +2,6 @@ import axios from 'axios';
 
 async function API(entity) {
 
-    console.log(entity);
-
     return axios({
         baseURL: entity.callURL,
         method: entity.callMethod,

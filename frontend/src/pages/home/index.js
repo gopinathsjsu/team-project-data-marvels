@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import Elements from '../../common/component/Element';
-import Button from '../../common/component/Button';
 import HotelCards from './components/hotelCard';
+import { Elements, Button } from '../../common/index'
 
 function Home() {
+
+    useEffect(() => {
+
+    }, [])
+
     const [val, setVal] = useState({
-        destination: '',
+        destination: 'San Jose',
         startDate: '2022-05-10',
         endDate: '2022-05-15',
     })
@@ -27,7 +31,7 @@ function Home() {
     return (
         <div className='container d-flex flex-column justify-content-center p-4'>
             <div className='card d-flex shadow-sm flex-row justify-content-around p-3 pb-0' style={{ borderRadius: '20px', marginBottom: '40px' }}>
-                <form className='col-12 d-flex flex-row justify-content-around'>
+                <form id='search_hotel' onSubmit={(e) => search(e)} className='col-12 d-flex flex-row justify-content-around'>
                     <Elements
                         formField={[
                             {
@@ -61,7 +65,7 @@ function Home() {
                         ]}
                     />
                     <div className='d-flex align-items-center mb-3'>
-                        <Button id='search' type='submit' text='Search Hotels' style={{ height: '40px' }} />
+                        <Button id='search' type='submit' text='Search Hotels' style={{ height: '40px' }} form='search_hotel' />
                     </div>
                 </form>
             </div>
