@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import HotelCards from './components/hotelCard';
-import { Elements, Button } from '../../common/index'
+import { Elements, Button, API, getLinks } from '../../common/index';
 
 function Home() {
-
-    useEffect(() => {
-
-    }, [])
+    const links = getLinks();
 
     const [val, setVal] = useState({
         destination: 'San Jose',
         startDate: '2022-05-10',
         endDate: '2022-05-15',
     })
+
+    const [hotelResult, setHotelResult] = useState([])
+
+    useEffect(() => {
+        API({
+            callURL: links.get_hotels,
+            callMethod: "GET",
+            // urlParams: {},
+            // headers: {},
+            callBack: (res) => {
+                setHotelResult(res);
+            }
+        })
+    }, [])
 
     function onchange(newval, id) {
         let temp = { ...val }
@@ -71,34 +82,7 @@ function Home() {
             </div>
             <div className='d-flex flex-row flex-wrap'>
                 <HotelCards
-                    data={[{
-                        hotelName: 'Hotel Name',
-                        city: 'City',
-                        img: '',
-                        roomType: 'Room Type',
-                        price: 'Price'
-                    },
-                    {
-                        hotelName: 'Hotel Name',
-                        city: 'City',
-                        img: '',
-                        roomType: 'Room Type',
-                        price: 'Price'
-                    },
-                    {
-                        hotelName: 'Hotel Name',
-                        city: 'City',
-                        img: '',
-                        roomType: 'Room Type',
-                        price: 'Price'
-                    },
-                    {
-                        hotelName: 'Hotel Name',
-                        city: 'City',
-                        img: '',
-                        roomType: 'Room Type',
-                        price: 'Price'
-                    }]}
+                    data={hotelResult}
                 />
             </div>
         </div>
