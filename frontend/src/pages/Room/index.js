@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
-import logo from './img/ActivityDiagram.jpeg'
-import { Elements, Button } from '../../common/index';
+import React, { useState, useEffect } from 'react';
+import logo from './img/ActivityDiagram.jpeg';
+import { useLocation } from 'react-router-dom';
+import { Elements, Button, API, getLinks } from '../../common/index';
 import { Numbers } from '../../common/component/options';
 
 function Room() {
+    const links = getLinks();
+    let location = useLocation().pathname;
+
+    useEffect(() => {
+        let hotelid = location.substring(location.lastIndexOf('/') + 1);
+
+        API({
+            callURL: links.hotel_detail + "{hotelid}?hotelid=" + hotelid,
+            callMethod: "GET",
+            callBack: (res) => {
+                console.log(res);
+            }
+        })
+    }, [])
 
     const [val, setVal] = useState({
         startDate: '2022-05-05',
