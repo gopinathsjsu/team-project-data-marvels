@@ -1,10 +1,11 @@
-const devURL = "http://localhost:8081/"
+const devURL = "http://localhost:8081/api/"
 
 const dev = {
-    sign_up: devURL + "api/users/signup",
-    login: devURL + "api/users/signin",
+    sign_up: devURL + "users/signup",
+    login: devURL + "users/signin",
 
-    get_hotels: devURL + "api/hotels"
+    get_hotels: devURL + "hotels",
+    search_hotel: devURL + "hotels/hotels"
 }
 
 function getLinks() {

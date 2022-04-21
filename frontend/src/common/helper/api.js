@@ -6,7 +6,7 @@ async function API(entity) {
         baseURL: entity.callURL,
         method: entity.callMethod,
         data: entity.bodyData,
-        // params: { ...entity.urlParams },
+        params: { ...entity.urlParams },
         // headers: { ...entity.headers }
     }).then((res) => {
         return entity.callBack(res.data);

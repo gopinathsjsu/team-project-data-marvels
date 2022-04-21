@@ -5,11 +5,12 @@ import { Elements, Button, API, getLinks } from '../../common/index';
 
 function Home() {
     const links = getLinks();
+    const [loading, setLoading] = useState(false);
 
     const [val, setVal] = useState({
-        destination: 'San Jose',
-        startDate: '2022-05-10',
-        endDate: '2022-05-15',
+        city: 'San Jose',
+        startdate: '2022-05-10',
+        enddate: '2022-05-15',
     })
 
     const [hotelResult, setHotelResult] = useState([])
@@ -18,8 +19,6 @@ function Home() {
         API({
             callURL: links.get_hotels,
             callMethod: "GET",
-            // urlParams: {},
-            // headers: {},
             callBack: (res) => {
                 setHotelResult(res);
             }
@@ -34,10 +33,22 @@ function Home() {
 
     function search(e) {
         e.preventDefault();
+        setLoading(true);
+
         let data = {
             ...val
         }
-        console.log(data);
+
+        API({
+            callURL: links.search_hotel,
+            callMethod: "GET",
+            urlParams: data,
+            callBack: (res) => {
+                setHotelResult(res);
+            }
+        })
+
+        setLoading(false);
     }
     return (
         <div className='container d-flex flex-column justify-content-center p-4'>
@@ -46,37 +57,37 @@ function Home() {
                     <Elements
                         formField={[
                             {
-                                id: 'destination',
+                                id: 'city',
                                 type: 'text',
-                                label: 'Destination',
-                                placeholder: 'Destination',
+                                label: 'Destination City',
+                                placeholder: 'Destination City',
                                 className: 'col-4',
                                 requiredFlag: true,
-                                value: val.destination,
+                                value: val.city,
                                 onchange: onchange
                             },
                             {
-                                id: 'startDate',
+                                id: 'startdate',
                                 type: 'date',
                                 label: 'Check In',
                                 requiredFlag: true,
                                 className: 'col-2',
-                                value: val.startDate,
+                                value: val.startdate,
                                 onchange: onchange
                             },
                             {
-                                id: 'endDate',
+                                id: 'enddate',
                                 type: 'date',
                                 label: 'Check Out',
                                 requiredFlag: true,
                                 className: 'col-2',
-                                value: val.endDate,
+                                value: val.enddate,
                                 onchange: onchange
                             }
                         ]}
                     />
                     <div className='d-flex align-items-center mb-3'>
-                        <Button id='search' type='submit' text='Search Hotels' style={{ height: '40px' }} form='search_hotel' />
+                        <Button id='search' loading={loading} type='submit' text='Search Hotels' style={{ height: '40px' }} form='search_hotel' />
                     </div>
                 </form>
             </div>
