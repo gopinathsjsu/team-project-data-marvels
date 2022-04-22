@@ -17,7 +17,7 @@ function HotelCards(props) {
             {
                 props.data.map((item, index) => (
                     // <div id={index} className='card shadow-sm m-3' style={{ padding: '15px', width: '330px' }}>
-                    <div id={index} className='card shadow-sm m-3 p-3'>
+                    <div key={index} className='card shadow-sm m-3 p-3'>
                         <h4 className='mb-0'>{item.hotelname}</h4>
                         <p text='City'>{item.city}</p>
                         <img src={logo} className='card-img' />
