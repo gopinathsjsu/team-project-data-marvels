@@ -25,6 +25,8 @@ function Variant(variant, color, size) {
 			return 'btn-outline' + color + ' btn-icon-circle ' + size
 		case 'icon':
 			return 'btn border-0 text' + color + ' ' + size
+		case 'link':
+			return 'btn-link' + color + ' ' + size
 		default:
 			return 'btn' + color + ' ' + size
 	}
