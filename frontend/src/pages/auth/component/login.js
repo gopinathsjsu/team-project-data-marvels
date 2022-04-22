@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Elements, Button, getLinks, API } from '../../../common';
+import Signup from './signup';
 
-export default function Login() {
-	const links = getLinks()
+export default function Login(props) {
+	const links = getLinks();
 
 	const [loading, setLoading] = useState(false)
 	const [val, setVal] = useState({
 		username: "tharun",
 		password: "test123"
-	}
-	)
+	})
 
 	function onchange(newval, id) {
 		let temp = { ...val }
@@ -22,16 +21,12 @@ export default function Login() {
 		e.preventDefault();
 		setLoading(true);
 
-		let data = {
-			...val
-		}
+		let data = { ...val }
 
 		API({
 			callURL: links.login,
 			callMethod: "POST",
-			// urlParams: {},
 			bodyData: data,
-			// headers: {},
 			callBack: (res) => {
 				console.log(res);
 			}
@@ -81,9 +76,19 @@ export default function Login() {
 				<div className='d-flex justify-content-center pt-3 pb-3' style={{ color: '#666666' }}>
 					<p className='mb-0'>
 						Don't have an account?
-						<NavLink to='/signup' className='text-primary ms-2'>
-							Register
-						</NavLink>
+						<Button
+							text='Register'
+							variant='link'
+							onClick={() => {
+								let temp = {
+									title: '',
+									body: (
+										<Signup setModalData={props.setModalData} />
+									),
+								}
+								props.setModalData(temp)
+							}}
+						/>
 					</p>
 				</div>
 			</div>

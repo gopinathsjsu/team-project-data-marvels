@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Elements, Button, API, getLinks } from '../../../common';
+import Login from './login';
 
-export default function SignUp() {
+export default function SignUp(props) {
     const links = getLinks();
     const [loading, setLoading] = useState(false);
 
@@ -28,15 +28,15 @@ export default function SignUp() {
         }
 
         API({
-			callURL: links.sign_up,
-			callMethod: "POST",
-			bodyData: data,
-			// headers: {},
+            callURL: links.sign_up,
+            callMethod: "POST",
+            bodyData: data,
+            // headers: {},
             // urlParams: {},
-			callBack: (res) => {
-				console.log(res);
-			}
-		})
+            callBack: (res) => {
+                console.log(res);
+            }
+        })
 
         setLoading(false);
     }
@@ -103,10 +103,20 @@ export default function SignUp() {
                 <div className='d-flex justify-content-center pt-4 pb-3' style={{ color: '#666666' }}>
                     <p className='mb-0'>
                         Already have an account?
-                        <NavLink to='/login' className='text-primary ms-2'>
-                            Log In
-                        </NavLink>
                     </p>
+                    <Button
+                        text='Login'
+                        variant='link'
+                        onClick={() => {
+                            let temp = {
+                                title: '',
+                                body: (
+                                    <Login setModalData={props.setModalData} />
+                                ),
+                            }
+                            props.setModalData(temp)
+                        }}
+                    />
                 </div>
             </div>
         </div>
