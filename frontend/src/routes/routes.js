@@ -1,12 +1,10 @@
 import React from 'react';
 
 function getRoutes() {
-    const Login = React.lazy(() => import('../pages/auth/component/login'))
-    const Signup = React.lazy(() => import('../pages/auth/component/signup'))
+    const Hotel = React.lazy(() => import('../pages/hotels/index'))
 
     let routes = [
-        { path: '/login', name: 'Login', component: Login },
-        { path: '/signup', name: 'Sign Up', component: Signup }
+        { path: '/app/hotel', name: 'Hotel', component: Hotel }
     ]
 
     return routes
