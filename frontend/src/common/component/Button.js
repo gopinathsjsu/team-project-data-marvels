@@ -72,6 +72,7 @@ function Button(props) {
 			style={props.style !== undefined ? props.style : null}
 			data-bs-toggle={props.target ? 'modal' : null}
 			data-bs-target={props.target ? '#' + props.target : null}
+			data-bs-dismiss={props.modalDismiss ? 'modal' : null}
 		>
 			{props.loading === true ? (
 				<span className='spinner-border spinner-border-sm me-1'></span>
