@@ -7,6 +7,7 @@ function Header() {
             <Nav className='d-flex flex-row ms-4'>
                 <Navbar.Brand href='/home'>Marvel Hotels</Navbar.Brand>
                 <Nav.Link href='/home'>Home</Nav.Link>
+                <Nav.Link href='/hotels'>Hotels</Nav.Link>
                 <Nav.Link href='/manageBooking'>Manage Reservations</Nav.Link>
             </Nav>
             <Nav className='d-flex flex-row me-4'>
