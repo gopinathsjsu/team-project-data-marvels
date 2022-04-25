@@ -7,7 +7,7 @@ function getRoutes() {
     const Reservations = React.lazy(() => import('../pages/reservations/index'))
 
     let routes = [
-        { path: '/app/hotel', name: 'Hotel', component: Hotel },
+        { path: '/app/hotels', name: 'Hotel', component: Hotel },
         { path: '/app/cart', name: 'Cart', component: Cart },
         { path: '/app/bookingmgmt', name: 'Booking Management', component: BookingMgmt },
         { path: '/app/reservations', name: 'Reservations', component: Reservations },
