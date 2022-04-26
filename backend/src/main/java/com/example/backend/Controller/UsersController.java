@@ -1,8 +1,12 @@
 package com.example.backend.Controller;
 
+import com.example.backend.ModelDTO.LoginRequest;
+import com.example.backend.ModelDTO.SignupRequest;
 import com.example.backend.Models.Users;
 import com.example.backend.Repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,15 +25,33 @@ public class UsersController {
         return usersRepository.findAll();
     }
 
-    @GetMapping("/{userid}")
-    public Optional<Users> getUserById(@RequestParam(value = "userid") Integer userid){
-        Optional<Users> users = usersRepository.findById(userid);
-        return users;
+    @PostMapping("/signin")
+    public ResponseEntity getUserById(@RequestBody LoginRequest user){
+        Users users = usersRepository.findByUsernameAndPass(user.getUsername(), user.getPassword());
+        return users != null ? ResponseEntity.ok(users) : ResponseEntity.badRequest().body("Error: User Not Found");
     }
 
-    @PostMapping
-    public Users addUser(@RequestBody Users user) {
-        return usersRepository.save(user);
+    @PostMapping("/signup")
+    public ResponseEntity addUser(@RequestBody SignupRequest user) {
+        if (usersRepository.existsByUsername(user.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: Username is already taken!");
+        }
+        if (usersRepository.existsByEmail(user.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: Email is already taken!");
+        }
+        Users newUser = new Users();
+        newUser.setUsername(user.getUsername());
+        newUser.setEmail(user.getEmail());
+        newUser.setPhone(user.getPhonenumber());
+        newUser.setUserrole("User");
+        newUser.setPass(user.getPassword());
+        newUser.setRewards(1000);
+        Users s = usersRepository.save(newUser);
+        return ResponseEntity.ok(s);
     }
 
     @DeleteMapping("/{userid}")
