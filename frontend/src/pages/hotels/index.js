@@ -19,6 +19,19 @@ function Hotels() {
         })
     }, [])
 
+    function deleteHotel(hotelid) {
+        console.log(hotelid);
+
+        API({
+			callURL: links.get_hotels,
+			callMethod: "DELETE",
+			urlParams:{"hotelid": hotelid},
+			callBack: (res) => {
+				console.log(res);
+			}
+		})
+    }
+
     return (
         <>
             <div className='container d-flex flex-column justify-content-center p-4'>
@@ -52,6 +65,11 @@ function Hotels() {
                             </div>
                             <div className='d-flex flex-column justify-content-center'>
                                 <p>{item.stars}</p>
+                                <Button
+                                    text='Delete'
+                                    color='danger'
+                                    onClick={() => deleteHotel(item.hotelid)}
+                                />
                             </div>
                         </li>
                     ))}
