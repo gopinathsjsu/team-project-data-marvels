@@ -22,7 +22,12 @@ function Home() {
             callURL: links.get_hotels,
             callMethod: "GET",
             callBack: (res) => {
-                setHotelResult(res);
+                if (res.status) {
+                    setHotelResult(res.data);
+                }
+                else {
+                    setHotelResult([]);
+                }
             }
         })
         setPageLoader(false);
@@ -47,7 +52,12 @@ function Home() {
             callMethod: "GET",
             urlParams: data,
             callBack: (res) => {
-                setHotelResult(res);
+                if (res.status) {
+                    setHotelResult(res.data);
+                }
+                else {
+                    setHotelResult([]);
+                }
             }
         })
 
@@ -94,18 +104,23 @@ function Home() {
                     </div>
                 </form>
             </div>
-            {pageLoader === false ? (
-                // <div className='container d-flex flex-column justify-content-center p-4'>
+            {
+                pageLoader === false ? (
+                    // <div className='container d-flex flex-column justify-content-center p-4'>
 
-                <div className='d-flex flex-row flex-wrap'>
-                    {hotelResult.length > 0 && <HotelCards
-                        data={hotelResult}
-                    />}
+                    <div className='d-flex flex-row flex-wrap'>
+                        {
+                            hotelResult.length > 0 ?
+                                <HotelCards data={hotelResult} /> :
+                                <> NO RESULTS</>
+                        }
+                    </div>
+                ) : <div className='d-flex justify-content-center'>
+                    <div className="spinner-border text-secondary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
                 </div>
-            ) : <div className='d-flex justify-content-center'>
-                <div className="spinner-border text-secondary" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div></div>}
+            }
         </div>
     )
 }
