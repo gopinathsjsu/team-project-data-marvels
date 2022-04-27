@@ -1,8 +1,13 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import getRoutes from '../routes/routes';
 
-function ProtectedWebPage() {
+function ProtectedWebPage(props) {
+
+    if (props.profile.data === undefined)
+        return <Redirect to='/home/' />
     return (
         <div className='page-content h-100'>
             <div className='container-fluid p-2 p-md-4'>
@@ -29,4 +34,6 @@ function ProtectedWebPage() {
     )
 }
 
-export default ProtectedWebPage;
+const mapStateToProps = (state) => { return { profile: state.greduce.profile } }
+
+export default connect(mapStateToProps)(ProtectedWebPage);
