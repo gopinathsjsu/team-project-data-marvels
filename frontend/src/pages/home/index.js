@@ -6,6 +6,7 @@ import { Elements, Button, API, getLinks } from '../../common/index';
 function Home() {
     const links = getLinks();
     const [loading, setLoading] = useState(false);
+    const [pageLoader, setPageLoader] = useState(false);
 
     const [val, setVal] = useState({
         city: 'San Jose',
@@ -16,6 +17,7 @@ function Home() {
     const [hotelResult, setHotelResult] = useState([])
 
     useEffect(() => {
+        setPageLoader(true);
         API({
             callURL: links.get_hotels,
             callMethod: "GET",
@@ -23,6 +25,7 @@ function Home() {
                 setHotelResult(res);
             }
         })
+        setPageLoader(false);
     }, [])
 
     function onchange(newval, id) {
@@ -91,11 +94,18 @@ function Home() {
                     </div>
                 </form>
             </div>
-            <div className='d-flex flex-row flex-wrap'>
-                <HotelCards
-                    data={hotelResult}
-                />
-            </div>
+            {pageLoader === false ? (
+                // <div className='container d-flex flex-column justify-content-center p-4'>
+
+                <div className='d-flex flex-row flex-wrap'>
+                    {hotelResult.length > 0 && <HotelCards
+                        data={hotelResult}
+                    />}
+                </div>
+            ) : <div className='d-flex justify-content-center'>
+                <div className="spinner-border text-secondary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div></div>}
         </div>
     )
 }
