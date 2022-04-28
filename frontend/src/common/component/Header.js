@@ -22,6 +22,7 @@ function Header() {
                     <Nav.Link href='/cart'>Cart</Nav.Link>
                     <Button
                         text='Login'
+                        variant='header-link'
                         target={modalId}
                         onClick={() => {
                             let temp = {
@@ -35,6 +36,7 @@ function Header() {
                     />
                     <Button
                         text='Sign up'
+                        variant='header-link'
                         target={modalId}
                         onClick={() => {
                             let temp = {

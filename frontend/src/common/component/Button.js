@@ -27,6 +27,8 @@ function Variant(variant, color, size) {
 			return 'btn border-0 text' + color + ' ' + size
 		case 'link':
 			return 'btn-link' + ' ' + size
+		case 'header-link':
+			return 'btn-link text-white' + ' ' + size
 		default:
 			return 'btn' + color + ' ' + size
 	}
