@@ -16,4 +16,10 @@ const roomStatus = [
     { label: 'Checked Out', value: 'Checked Out' }
 ]
 
-export { Numbers, roomStatus }
+const roomType = {
+    1: 'Single',
+    2: 'Double',
+    3: 'Suite'
+}
+
+export { Numbers, roomStatus, roomType }
