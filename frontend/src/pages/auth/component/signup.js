@@ -125,7 +125,7 @@ export default function SignUp() {
                 </form>
 
                 <div className='d-flex justify-content-center pt-4 pb-3' style={{ color: '#666666' }}>
-                    <p className='mb-0 mt-1'>
+                    <p className='mb-0'>
                         Already have an account?
                     </p>
                     <NavLink to='/login' className='text-primary ms-2'>

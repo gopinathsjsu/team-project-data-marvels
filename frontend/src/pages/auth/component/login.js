@@ -89,7 +89,7 @@ function Login(props) {
 					</div>
 				</form>
 				<div className='d-flex justify-content-center pt-3 pb-3' style={{ color: '#666666' }}>
-					<p className='mb-0 mt-1'>
+					<p className='mb-0'>
 						Don't have an account?
 					</p>
 					<NavLink to='/signup' className='text-primary ms-2'>

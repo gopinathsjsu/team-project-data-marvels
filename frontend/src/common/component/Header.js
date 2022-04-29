@@ -13,14 +13,14 @@ function Header() {
         <>
             <Navbar bg="dark" variant="dark" className='d-flex flow-row justify-content-between'>
                 <Nav className='d-flex flex-row ms-4'>
-                    <NavLink to='/app'>Marvel Hotel</NavLink>
-                    <NavLink to='/app'>Home</NavLink>
-                    <NavLink to='/app/hotels'>Hotels</NavLink>
-                    <NavLink to='/app/manageBooking'>Manage Reservations</NavLink>
+                    <NavLink className='navbar-brand' to='/app'>Marvel Hotel</NavLink>
+                    <NavLink className='nav-link' to='/app'>Home</NavLink>
+                    <NavLink className='nav-link' to='/app/hotels'>Hotels</NavLink>
+                    <NavLink className='nav-link' to='/app/manageBooking'>Manage Reservations</NavLink>
                 </Nav>
                 <Nav className='d-flex flex-row me-4'>
-                    <NavLink to='/app/reservations'>My Reservations</NavLink>
-                    <NavLink to='/app/cart'>Cart</NavLink>
+                    <NavLink className='nav-link' to='/app/reservations'>My Reservations</NavLink>
+                    <NavLink className='nav-link' to='/app/cart'>Cart</NavLink>
 
                     <Button
                         text='Logout'
