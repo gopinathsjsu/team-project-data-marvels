@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Elements, Button, API, getLinks } from '../../../common';
-import Login from './login';
 
-export default function SignUp(props) {
+import { NavLink } from 'react-router-dom';
+
+import { Elements, Button, API, getLinks } from '../../../common';
+
+export default function SignUp() {
     const links = getLinks();
     const [loading, setLoading] = useState(false);
 
@@ -12,6 +14,9 @@ export default function SignUp(props) {
         phonenumber: "669204",
         email: "yash@sjsu.edu"
     })
+
+    const [errorMessage, setErrorMessage] = useState(null)
+    const [successMessage, setSuccessMessage] = useState(null)
 
     function onchange(newval, id) {
         let temp = { ...val }
@@ -31,10 +36,15 @@ export default function SignUp(props) {
             callURL: links.sign_up,
             callMethod: "POST",
             bodyData: data,
-            // headers: {},
-            // urlParams: {},
             callBack: (res) => {
-                console.log(res);
+                if (res.status) {
+                    setErrorMessage(null);
+                    setSuccessMessage(res.data);
+                }
+                else {
+                    setErrorMessage(res.message);
+                    setSuccessMessage(null);
+                }
             }
         })
 
@@ -88,6 +98,18 @@ export default function SignUp(props) {
                         ]}
                     />
                 </div>
+
+                {successMessage !== null && <div className="alert alert-success" role="alert">
+                    {successMessage}
+                    <NavLink to="/login" className="alert-link">
+                        {' '}Click here to login
+                    </NavLink>
+                </div>}
+
+                {errorMessage !== null && <div className="alert alert-danger" role="alert">
+                    {errorMessage}
+                </div>}
+
                 <div className='d-flex justify-content-center'>
                     <Button
                         text={<span className='font-14 m-0'>Sign Up</span>}
@@ -103,19 +125,9 @@ export default function SignUp(props) {
                 <p className='mb-0 mt-1'>
                     Already have an account?
                 </p>
-                <Button
-                    text='Login'
-                    variant='link'
-                    onClick={() => {
-                        let temp = {
-                            title: '',
-                            body: (
-                                <Login setModalData={props.setModalData} />
-                            ),
-                        }
-                        props.setModalData(temp)
-                    }}
-                />
+                <NavLink to='/login' className='text-primary ms-2'>
+                    Login
+                </NavLink>
             </div>
         </div>
     );
