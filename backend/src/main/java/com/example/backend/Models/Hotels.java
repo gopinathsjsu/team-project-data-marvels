@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 @Data
@@ -13,9 +14,15 @@ public class Hotels {
 
     private String hotelname;
 
-    private String Address;
+    private String address;
 
-    private String Country;
+    private String country;
+
+    private String city;
+
+    private String state;
 
     private Float stars;
+
+    private List<Rooms> roomsList;
 }
