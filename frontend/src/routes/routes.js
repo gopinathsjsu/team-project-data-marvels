@@ -6,7 +6,7 @@ function getRoutes() {
 
     const Home = React.lazy(() => import('../pages/home/index'))
     const Cart = React.lazy(() => import('../pages/cart/index'))
-    const Room = React.lazy(() => import('../pages/Room/index'))
+    // const Room = React.lazy(() => import('../pages/Room/index'))
     const Hotel = React.lazy(() => import('../pages/Hotel/index'))
     const Reservations = React.lazy(() => import('../pages/reservations/index'))
 
@@ -18,7 +18,7 @@ function getRoutes() {
         { path: '/app/cart', name: 'Cart', component: Cart },
         { path: '/app/reservations', name: 'Reservations', component: Reservations },
         { path: '/app/hotel/:hotelid', name: 'Hotel', component: Hotel },
-        { path: '/app/room/:hotelid', name: 'Room', component: Room }
+        // { path: '/app/room/:hotelid', name: 'Room', component: Room }
     ]
 
     return routes

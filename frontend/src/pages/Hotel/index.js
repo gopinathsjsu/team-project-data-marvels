@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
-import { Elements, API, getLinks } from '../../common';
+import { Modal, API, getLinks } from '../../common';
 import Rooms from './component/Hotel.rooms';
 
 
 function Hotel(props) {
     const links = getLinks();
-    const [hotelDetail, setHotelDetails] = useState(null)
+    let modalId = 'room-modal'
+    const [hotelDetail, setHotelDetails] = useState({
+        hotelname: '',
+        address: '',
+        city: '',
+        country: '',
+        stars: 0
+    })
     const [rooms, setRooms] = useState([])
+    const [modalData, setModalData] = useState({
+        title: '',
+        body: '',
+        footer: '',
+    })
 
     useEffect(() => {
         let hotelId = props.history.location.pathname;
@@ -44,14 +56,22 @@ function Hotel(props) {
     }, [])
 
     return (
-        <div className='container d-flex flex-column justify-content-center p-4'>
-            <h1>{hotelDetail.hotelname}</h1>
-            <h3>{hotelDetail.address}</h3>
-            <h4>{hotelDetail.city}</h4>
-            <h4>{hotelDetail.country}</h4>
-            <h5>Rating {hotelDetail.stars}</h5>
-            <Rooms data={rooms} />
-        </div>
+        <>
+            <div className='container d-flex flex-column justify-content-center p-4'>
+                <h1>{hotelDetail.hotelname}</h1>
+                <h3>{hotelDetail.address}</h3>
+                <h4>{hotelDetail.city}</h4>
+                <h4>{hotelDetail.country}</h4>
+                <h5>Rating {hotelDetail.stars}</h5>
+                <Rooms data={rooms} modalId={modalId} setModalData={setModalData} />
+            </div>
+            <Modal
+                title={modalData.title}
+                body={modalData.body}
+                footer={modalData.footer}
+                modalId={modalId}
+            />
+        </>
     )
 }
 

@@ -4,14 +4,9 @@ import { Button } from '../../../common/index';
 import { roomType } from '../../../common/component/options';
 
 import room_image from '../../../assets/hotelroom.jpeg'
+import Room from './RoomModal';
 
 function Rooms(props) {
-
-    function findRoom(hotelid) {
-
-        //     history.push({pathname: '/app/room/' + hotelid});
-
-    }
 
     return (
         <>
@@ -29,7 +24,23 @@ function Rooms(props) {
                             </div>
                         </div>
                         <div className='d-flex flex-row justify-content-center'>
-                            <Button variant='outline' id='details' text='Book room' onClick={() => findRoom(item.hotelid)} />
+                            <Button
+                                target={props.modalId}
+                                variant='outline'
+                                id='details'
+                                text='Book room'
+                                onClick={() => {
+                                    let temp = {
+                                        ...{
+                                            title: 'Book Room',
+                                            body: (
+                                                <Room />
+                                            ),
+                                        },
+                                    }
+                                    props.setModalData(temp)
+                                }}
+                            />
                         </div>
                     </div>
                 ))
