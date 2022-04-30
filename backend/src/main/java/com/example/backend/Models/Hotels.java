@@ -3,7 +3,9 @@ package com.example.backend.Models;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -24,5 +26,6 @@ public class Hotels {
 
     private Float stars;
 
-    private List<Rooms> roomsList;
+//    @OneToMany(targetEntity=Rooms.class, mappedBy="hotelid", fetch= FetchType.EAGER)
+//    private List<Rooms> roomsList;
 }
