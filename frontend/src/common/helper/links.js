@@ -1,4 +1,5 @@
-const devURL = "http://localhost:8081/api/"
+// const devURL = "http://localhost:8081/api/"
+const devURL = "http://ec2-34-235-151-159.compute-1.amazonaws.com:8081/api/"
 
 const dev = {
     sign_up: devURL + "users/signup",
