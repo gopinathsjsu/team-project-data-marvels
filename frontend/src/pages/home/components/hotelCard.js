@@ -8,7 +8,7 @@ function HotelCards(props) {
 
     function findHotel(hotelid) {
 
-        history.push({pathname: '/app/room/' + hotelid});
+        history.push({pathname: '/app/hotel/' + hotelid});
 
     }
 
