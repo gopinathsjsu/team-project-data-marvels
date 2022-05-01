@@ -1,6 +1,8 @@
 package com.example.backend.Models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,5 +27,8 @@ public class Bookings {
 
     private LocalDate endDate;
 
-    private Float roomprice;
+    private Double roomprice;
+
+    private String paymenttype;
+
 }

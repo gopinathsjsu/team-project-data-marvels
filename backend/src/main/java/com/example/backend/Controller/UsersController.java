@@ -50,6 +50,7 @@ public class UsersController {
         newUser.setUserrole("User");
         newUser.setPass(user.getPassword());
         newUser.setRewards(1000);
+        newUser.setMemberType("Silver");
         Users s = usersRepository.save(newUser);
         return ResponseEntity.ok(s);
     }

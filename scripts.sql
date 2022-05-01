@@ -42,10 +42,23 @@ userrole varchar(16)
 create table bookings(
 bookingid int IDENTITY(1,1) primary key,
 hotelid int, 
+roomtypeid int,
+roomid int,
 userid int,
-startDdate date,
+startDate date,
 endDate date,
 amount float,
+paymenttype VARCHAR(16),
 FOREIGN KEY (userid) REFERENCES users(userid),
 FOREIGN KEY (hotelid) REFERENCES hotels(hotelid)
 );
+
+-- drop table bookings
+
+-- insert into bookings VALUEs(1, 1, 2, )
+
+insert into bookings values (1,1,6,1,'2021-08-21','2021-07-29',1000),
+(2,2,7,1,'2021-01-21','2021-08-29',890),
+(2,1,4,2,'2021-01-21','2021-01-25',1234),
+(4,2,12,2,'2021-03-20','2021-01-28',5432),
+(5,1,8,2,'2021-02-21','2021-03-21',10222)
