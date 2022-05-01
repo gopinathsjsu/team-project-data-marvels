@@ -22,4 +22,10 @@ const roomType = {
     3: 'Suite'
 }
 
-export { Numbers, roomStatus, roomType }
+const memberType = {
+    'Silver' : 150,
+    'Gold' : 125,
+    'Platinum' : 100
+}
+
+export { Numbers, roomStatus, roomType, memberType }
