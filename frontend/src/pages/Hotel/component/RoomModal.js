@@ -4,7 +4,6 @@ import { Elements, Button, API, getLinks } from '../../../common/index';
 
 
 function Room(props) {
-    console.log(props);
     let availableRooms = [];
 
     for (let index = 1; index <= props.roomDetail.available; index++) {
@@ -49,28 +48,35 @@ function Room(props) {
     function onchange(newval, id) {
         let temp = { ...val }
         temp[id] = newval
-        let guests = newval.label * 2 + newval.label;
+        let guests = temp.noOfRooms.label * 2 + temp.noOfRooms.label;
         let guestOptions = []
         for (let index = 1; index <= guests; index++) {
             guestOptions.push({ label: index })
         }
 
+        if (id !== 'noOfGuests')
+            temp.noOfGuests = { label: 2 * temp.noOfRooms.label }
+
         let newPrice = props.roomDetail.roomprice
+        let extraGuests = temp.noOfGuests.label - (temp.noOfRooms.label * 2)
 
-        if(temp.ContinentalBreakfast)
-        newPrice += 10
+        if (extraGuests > 0)
+            newPrice += (10 * extraGuests)
 
-        if(temp.swimmingPool)
-        newPrice += 5
+        if (temp.ContinentalBreakfast)
+            newPrice += 10
 
-        if(temp.meals)
-        newPrice += 25
+        if (temp.swimmingPool)
+            newPrice += 5
 
-        if(temp.parking)
-        newPrice += 15
+        if (temp.meals)
+            newPrice += 25
 
-        if(temp.fitnessRoom)
-        newPrice += 5
+        if (temp.parking)
+            newPrice += 15
+
+        if (temp.fitnessRoom)
+            newPrice += 5
 
         setPrice(newPrice)
         setGuestCap(guestOptions);
@@ -170,6 +176,10 @@ function Room(props) {
                                         ]} />
                                     </div>
                                 </div>
+                                <div>
+                                    2 guests per room
+                                </div>
+                                <div>extra guests $10</div>
                                 <div className='row'>
                                     <h2> Amenities </h2>
                                     <div className='col-md-6'>
