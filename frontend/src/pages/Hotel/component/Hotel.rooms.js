@@ -34,7 +34,10 @@ function Rooms(props) {
                                         ...{
                                             title: 'Book Room',
                                             body: (
-                                                <Room />
+                                                <Room
+                                                    hotelDetail={props.hotelDetail}
+                                                    roomDetail={item}
+                                                />
                                             ),
                                         },
                                     }

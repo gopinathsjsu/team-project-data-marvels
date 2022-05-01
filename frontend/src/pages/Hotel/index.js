@@ -63,7 +63,12 @@ function Hotel(props) {
                 <h4>{hotelDetail.city}</h4>
                 <h4>{hotelDetail.country}</h4>
                 <h5>Rating {hotelDetail.stars}</h5>
-                <Rooms data={rooms} modalId={modalId} setModalData={setModalData} />
+                <Rooms
+                    hotelDetail={hotelDetail}
+                    data={rooms}
+                    modalId={modalId}
+                    setModalData={setModalData}
+                />
             </div>
             <Modal
                 title={modalData.title}

@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../../assets/sample.jpg';
-import { useLocation } from 'react-router-dom';
 import { Elements, Button, API, getLinks } from '../../../common/index';
 import { Numbers } from '../../../common/component/options';
 
-function Room() {
+function Room(props) {
+    // console.log(props);
+    let availableRooms = [];
+
+    for (let index = 1; index <= props.roomDetail.available; index++) {
+        availableRooms.push({ label: index });
+    }
+
+    const [guestCap, setGuestCap] = useState([
+        { label: 1 },
+        { label: 2 },
+        { label: 3 }
+    ])
     // const links = getLinks();
     // let location = useLocation().pathname;
 
@@ -36,6 +47,13 @@ function Room() {
     function onchange(newval, id) {
         let temp = { ...val }
         temp[id] = newval
+        let guests = newval.label * 2 + newval.label;
+        let guestOptions = []
+        for (let index = 1; index <= guests; index++) {
+            guestOptions.push({label : index})
+            
+        }
+        setGuestCap(guestOptions);
         setVal(temp)
     }
 
@@ -57,8 +75,8 @@ function Room() {
                     <div className='d-flex flex-column justify-content-center h-100'>
                         <span>
                             <div className='text-center mb-4'>
-                                <h4> Hotel Name </h4>
-                                <h5> city </h5>
+                                <h4> {props.hotelDetail.hotelname} </h4>
+                                <h5> {props.hotelDetail.city} </h5>
                             </div>
                             <div className='text-center mb-4'>
                                 <img width='280' src={logo} alt='logo' />
@@ -83,6 +101,7 @@ function Room() {
                                             requiredFlag: true,
                                             autoFocus: true,
                                             value: val.startDate,
+                                            disabled: true,
                                             onchange: onchange
                                         }]} />
                                     </div>
@@ -94,11 +113,12 @@ function Room() {
                                             requiredFlag: true,
                                             autoFocus: true,
                                             value: val.endDate,
+                                            disabled: true,
                                             onchange: onchange
                                         }]} />
                                     </div>
                                 </div>
-                                <div className='row'>
+                                <div className='row flex'>
                                     <div className='col-md-6'>
                                         <Elements formField={[
                                             {
@@ -108,7 +128,7 @@ function Room() {
                                                 autoFocus: true,
                                                 requiredFlag: true,
                                                 value: val.noOfRooms,
-                                                options: Numbers,
+                                                options: availableRooms,
                                                 valueKey: 'label',
                                                 onchange: onchange
                                             }
@@ -123,8 +143,9 @@ function Room() {
                                                 autoFocus: true,
                                                 requiredFlag: true,
                                                 value: val.noOfGuests,
-                                                options: Numbers,
+                                                options: guestCap,
                                                 valueKey: 'label',
+                                                // disabled: true,
                                                 onchange: onchange
                                             }
                                         ]} />
