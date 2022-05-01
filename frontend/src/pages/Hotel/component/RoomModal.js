@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../../assets/sample.jpg';
 import { Elements, Button, API, getLinks } from '../../../common/index';
-import { Numbers } from '../../../common/component/options';
+
 
 function Room(props) {
-    // console.log(props);
+    console.log(props);
     let availableRooms = [];
 
     for (let index = 1; index <= props.roomDetail.available; index++) {
@@ -31,6 +31,8 @@ function Room(props) {
     //     })
     // }, [])
 
+    const [price, setPrice] = useState(props.roomDetail.roomprice)
+
     const [val, setVal] = useState({
         startDate: '2022-05-05',
         endDate: '2022-05-06',
@@ -50,9 +52,27 @@ function Room(props) {
         let guests = newval.label * 2 + newval.label;
         let guestOptions = []
         for (let index = 1; index <= guests; index++) {
-            guestOptions.push({label : index})
-            
+            guestOptions.push({ label: index })
         }
+
+        let newPrice = props.roomDetail.roomprice
+
+        if(temp.ContinentalBreakfast)
+        newPrice += 10
+
+        if(temp.swimmingPool)
+        newPrice += 5
+
+        if(temp.meals)
+        newPrice += 25
+
+        if(temp.parking)
+        newPrice += 15
+
+        if(temp.fitnessRoom)
+        newPrice += 5
+
+        setPrice(newPrice)
         setGuestCap(guestOptions);
         setVal(temp)
     }
@@ -145,7 +165,6 @@ function Room(props) {
                                                 value: val.noOfGuests,
                                                 options: guestCap,
                                                 valueKey: 'label',
-                                                // disabled: true,
                                                 onchange: onchange
                                             }
                                         ]} />
@@ -214,6 +233,9 @@ function Room(props) {
                                         />
                                     </div>
                                 </div>
+                            </div>
+                            <div>
+                                Total Cost ${price}
                             </div>
                             <div className='d-flex justify-content-center'>
                                 <Button
