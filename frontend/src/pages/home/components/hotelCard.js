@@ -6,8 +6,9 @@ import { useHistory } from 'react-router-dom';
 function HotelCards(props) {
     let history = useHistory();
 
-    function findHotel(hotelid) {
+    function findHotel(hotelid, index) {
 
+        props.set_hotelData(props.data[index]);
         history.push({pathname: '/app/hotel/' + hotelid});
 
     }
@@ -31,7 +32,7 @@ function HotelCards(props) {
                             </div>
                         </div>
                         <div className='d-flex flex-row justify-content-center'>
-                            <Button variant='outline' id='details' text='Search Hotels' onClick={() => findHotel(item.hotelid)} />
+                            <Button variant='outline' id='details' text='Search Hotels' onClick={() => findHotel(item.hotelid, index)} />
                         </div>
                     </div>
                 ))
