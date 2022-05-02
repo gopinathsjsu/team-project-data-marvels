@@ -36,8 +36,8 @@ function Room(props) {
     const [price, setPrice] = useState(props.roomDetail.roomprice)
 
     const [val, setVal] = useState({
-        startDate: '2022-05-05',
-        endDate: '2022-05-06',
+        startDate: props.date.startDate,
+        endDate: props.date.endDate,
         noOfGuests: { label: 2 },
         noOfRooms: { label: 1 },
         ContinentalBreakfast: false,
@@ -245,7 +245,6 @@ function Room(props) {
                                 <Button
                                     text='Book'
                                     type='submit'
-                                // loading={loading}
                                 />
                                 <Button
                                     text={rewards + ' rewards required'}
@@ -262,7 +261,8 @@ function Room(props) {
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.greduce.profile
+        profile: state.greduce.profile,
+        date: state.greduce.date
     }
 }
 

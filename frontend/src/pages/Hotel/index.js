@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
 import { Modal, API, getLinks } from '../../common';
 import Rooms from './component/Hotel.rooms';
@@ -22,27 +23,12 @@ function Hotel(props) {
     })
 
     useEffect(() => {
-        let hotelId = props.history.location.pathname;
-        let id = hotelId.substring(hotelId.lastIndexOf('/') + 1)
-
-        API({
-            callURL: links.hotel + "/" + id,
-            callMethod: "GET",
-            callBack: (res) => {
-                if (res.status) {
-                    setHotelDetails(res.data);
-                }
-                else {
-                    setHotelDetails(null);
-                }
-
-            }
-        })
+        setHotelDetails(props.hotel);
 
         API({
             callURL: links.hotel_rooms,
             callMethod: "GET",
-            urlParams: { hotelid: id },
+            urlParams: { hotelid: props.hotel.hotelid, startdate: props.date.startDate, enddate: props.date.endDate },
             callBack: (res) => {
                 if (res.status) {
                     setRooms(res.data);
@@ -68,6 +54,7 @@ function Hotel(props) {
                     data={rooms}
                     modalId={modalId}
                     setModalData={setModalData}
+                    set_hotelData={props.set_hotelData}
                 />
             </div>
             <Modal
@@ -80,4 +67,6 @@ function Hotel(props) {
     )
 }
 
-export default Hotel
+const mapStateToProps = (state) => { return { hotel: state.greduce.hotel, date: state.greduce.date } }
+
+export default connect(mapStateToProps, null)(Hotel);
