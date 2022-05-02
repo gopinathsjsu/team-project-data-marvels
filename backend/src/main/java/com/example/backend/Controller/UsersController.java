@@ -43,16 +43,17 @@ public class UsersController {
                     .badRequest()
                     .body("Error: Email is already taken!");
         }
+
         Users newUser = new Users();
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
         newUser.setPhone(user.getPhonenumber());
-        newUser.setUserrole("User");
+        newUser.setUserrole("Customer");
         newUser.setPass(user.getPassword());
-        newUser.setRewards(1000);
-        newUser.setMemberType("Silver");
+        newUser.setRewards(1000.0);
+        newUser.setMembertype("Silver");
         Users s = usersRepository.save(newUser);
-        return ResponseEntity.ok(s);
+        return ResponseEntity.ok().body("Account creation success");
     }
 
     @DeleteMapping("/{userid}")
