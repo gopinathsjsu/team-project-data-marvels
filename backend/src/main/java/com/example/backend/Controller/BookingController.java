@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.QueryParam;
 import java.util.List;
 
 @CrossOrigin
@@ -24,7 +25,6 @@ public class BookingController {
     @GetMapping("/userid")
     public List<Bookings> getBookingsByUserid(@RequestParam(value = "userid") Integer userid) {
         return bookingsRepository.findByUserid(userid);
-
     }
 
     @PostMapping
@@ -62,6 +62,12 @@ public class BookingController {
 
         usersRepository.save(user);
         return bookingsRepository.save(booking);
+    }
+
+    @DeleteMapping(value = "/{bookingid}")
+    public String deleteBooking(@QueryParam(value = "bookingid") Integer bookingid) {
+        bookingsRepository.deleteById(bookingid);
+        return "Booking cancelled successfully";
     }
 
 }
