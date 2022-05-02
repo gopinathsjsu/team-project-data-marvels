@@ -2,16 +2,14 @@ package com.example.backend.Models;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
 public class Hotels {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer hotelid;
 
     private String hotelname;
@@ -24,7 +22,7 @@ public class Hotels {
 
     private String state;
 
-    private Float stars;
+    private Double stars;
 
 //    @OneToMany(targetEntity=Rooms.class, mappedBy="hotelid", fetch= FetchType.EAGER)
 //    private List<Rooms> roomsList;
