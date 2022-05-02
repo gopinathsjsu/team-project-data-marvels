@@ -15,7 +15,16 @@ const GenralReducer = (state = generalstate, action) => {
                 role: action
             }
             break
-
+        case 'SET_HOTEL':
+            state = {
+                ...state,
+                hotel: action.data
+            }
+        case 'SET_DATE':
+            state = {
+                ...state,
+                date: action.data
+            }
         default:
             state = { ...state }
     }

@@ -11,3 +11,17 @@ export function set_role(new_state) {
         data: new_state
     }
 }
+
+export function set_hotelData(new_state) {
+    return {
+        type: "SET_HOTEL",
+        data: new_state
+    }
+}
+
+export function set_date(new_state) {
+    return {
+        type: "SET_DATE",
+        data: new_state
+    }
+}

@@ -1,4 +1,6 @@
 export const generalstate = {
     profile: {},
-    role: ''
+    role: '',
+    hotel: {},
+    date: {}
 }
