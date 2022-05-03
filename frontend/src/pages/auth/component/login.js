@@ -32,8 +32,8 @@ function Login(props) {
 			callBack: (res) => {
 				if (res.status) {
 					setLoginError(null);
-					props.set_userData(res);
-					props.set_role(res.userrole);
+					props.set_userData(res.data);
+					props.set_role(res.data.userrole);
 				}
 				else {
 					setLoginError(res.message);

@@ -6,7 +6,7 @@ import getRoutes from '../routes/routes';
 import { Header } from '../common';
 
 function ProtectedWebPage(props) {
-    if (props.profile.data === undefined)
+    if (props.profile.userid === undefined)
         return <Redirect to='/' />
     return (
 
