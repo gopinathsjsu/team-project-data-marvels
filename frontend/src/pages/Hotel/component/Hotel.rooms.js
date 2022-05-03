@@ -38,6 +38,7 @@ function Rooms(props) {
                                                 <Room
                                                     hotelDetail={props.hotelDetail}
                                                     roomDetail={item}
+                                                    modalId={props.modalId}
                                                 />
                                             ),
                                         },

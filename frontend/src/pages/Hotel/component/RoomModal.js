@@ -125,6 +125,7 @@ function Room(props) {
                 if (res.status) {
                     setSuccess("Booked Successfully")
                     setError(null)
+                    window.bootstrap.Modal.getInstance(document.getElementById(props.modalId)).hide()
                 }
                 else {
                     setSuccess(null)
