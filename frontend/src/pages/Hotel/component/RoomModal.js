@@ -5,7 +5,9 @@ import { Elements, Button, API, getLinks } from '../../../common/index';
 import { memberType } from '../../../common/component/options';
 
 function Room(props) {
+    const links = getLinks();
     let availableRooms = [];
+    const [loading, setLoading] = useState(false)
 
     for (let index = 1; index <= props.roomDetail.available; index++) {
         availableRooms.push({ label: index });
@@ -17,25 +19,10 @@ function Room(props) {
         { label: 3 }
     ])
 
-    const [rewards, setRewards] = useState(props.roomDetail.roomprice * memberType[props.profile.data.data.membertype])
-    // const links = getLinks();
-    // let location = useLocation().pathname;
-
-    // useEffect(() => {
-    //     let hotelid = location.substring(location.lastIndexOf('/') + 1);
-
-    //     API({
-    //         callURL: links.hotel_detail + "{hotelid}?hotelid=" + hotelid,
-    //         callMethod: "GET",
-    //         callBack: (res) => {
-    //             console.log(res);
-    //         }
-    //     })
-    // }, [])
-
-    const [price, setPrice] = useState(props.roomDetail.roomprice)
-
     const [val, setVal] = useState({
+        hotelid: props.hotelDetail.hotelid,
+        roomtypeid: props.roomDetail.roomtypeid,
+        roomid: props.roomDetail.roomid,
         startDate: props.date.startDate,
         endDate: props.date.endDate,
         noOfGuests: { label: 2 },
@@ -44,7 +31,11 @@ function Room(props) {
         swimmingPool: false,
         meals: false,
         parking: false,
-        fitnessRoom: false
+        fitnessRoom: false,
+        rewards: false,
+        status: 'booked',
+        roomrewards: props.roomDetail.roomprice * memberType[props.profile.data.data.membertype],
+        roomprice: props.roomDetail.roomprice
     })
 
     function onchange(newval, id) {
@@ -80,7 +71,8 @@ function Room(props) {
         if (temp.fitnessRoom)
             newPrice += 5
 
-        setPrice(newPrice)
+        temp['roomprice'] = newPrice
+        temp['roomrewards'] = newPrice * memberType[props.profile.data.data.membertype]
         setGuestCap(guestOptions);
         setVal(temp)
     }
@@ -91,6 +83,15 @@ function Room(props) {
             ...val
         }
         console.log(data);
+
+
+        //     API({
+        //         callURL: links.hotel_detail + "{hotelid}?hotelid=" + hotelid,
+        //         callMethod: "GET",
+        //         callBack: (res) => {
+        //             console.log(res);
+        //         }
+        //     })
     }
 
     return (
@@ -226,18 +227,30 @@ function Room(props) {
                             </div>
                         </div>
                     </div>
+                    <div>
+                        Rewards requried {val.roomrewards}
+                        <Elements
+                            formField={[
+                                {
+                                    id: 'rewards',
+                                    type: 'checkbox',
+                                    form: 'booking_form',
+                                    value: val.rewards,
+                                    label: props.profile.data.data.rewards < val.roomrewards ? 'Not enough rewards' : 'Use rewards',
+                                    onchange: onchange,
+                                    disabled: props.profile.data.data.rewards < val.roomrewards
+                                }
+                            ]}
+                        />
+                    </div>
                     <div className='d-flex flex-row justify-content-start'>
-                        <h5>Total Cost: ${price}</h5>
+                        <h5>Total Cost: ${val.roomprice}</h5>
                     </div>
                     <div className='d-flex flex-row justify-content-evenly mt-2'>
                         <Button
                             text='Book'
                             type='submit'
-                        // loading={loading}
-                        />
-                        <Button
-                            text={rewards + ' rewards required'}
-                            disabled={props.profile.data.data.rewards < rewards}
+                            loading={loading}
                         />
                     </div>
                 </form>
