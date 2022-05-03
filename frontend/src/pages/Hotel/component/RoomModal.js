@@ -8,6 +8,8 @@ function Room(props) {
     const links = getLinks();
     let availableRooms = [];
     const [loading, setLoading] = useState(false)
+    const [success, setSuccess] = useState(null)
+    const [error, setError] = useState(null)
 
     for (let index = 1; index <= props.roomDetail.available; index++) {
         availableRooms.push({ label: index });
@@ -23,20 +25,45 @@ function Room(props) {
         hotelid: props.hotelDetail.hotelid,
         roomtypeid: props.roomDetail.roomtypeid,
         roomid: props.roomDetail.roomid,
+        userid: props.profile.userid,
         startDate: props.date.startDate,
         endDate: props.date.endDate,
-        noOfGuests: { label: 2 },
-        noOfRooms: { label: 1 },
-        ContinentalBreakfast: false,
-        swimmingPool: false,
+        roomprice: props.roomDetail.roomprice,
+        paymenttype: 'card',
+        status: 'booked',
+        continentalbreakfast: false,
+        swimmingpool: false,
         meals: false,
         parking: false,
         fitnessRoom: false,
         rewards: false,
-        status: 'booked',
-        roomrewards: props.roomDetail.roomprice * memberType[props.profile.data.data.membertype],
-        roomprice: props.roomDetail.roomprice
+        noOfGuests: { label: 2 },
+        noOfRooms: { label: 1 },
+        roomrewards: props.roomDetail.roomprice * memberType[props.profile.membertype],
     })
+
+    useEffect(() => {
+        setVal({
+            hotelid: props.hotelDetail.hotelid,
+            roomtypeid: props.roomDetail.roomtypeid,
+            roomid: props.roomDetail.roomid,
+            userid: props.profile.userid,
+            startDate: props.date.startDate,
+            endDate: props.date.endDate,
+            roomprice: props.roomDetail.roomprice,
+            paymenttype: 'card',
+            status: 'booked',
+            continentalbreakfast: false,
+            swimmingpool: false,
+            meals: false,
+            parking: false,
+            fitnessRoom: false,
+            rewards: false,
+            noOfGuests: { label: 2 },
+            noOfRooms: { label: 1 },
+            roomrewards: props.roomDetail.roomprice * memberType[props.profile.membertype],
+        })
+    }, [props])
 
     function onchange(newval, id) {
         let temp = { ...val }
@@ -56,10 +83,10 @@ function Room(props) {
         if (extraGuests > 0)
             newPrice += (10 * extraGuests)
 
-        if (temp.ContinentalBreakfast)
+        if (temp.continentalbreakfast)
             newPrice += 10
 
-        if (temp.swimmingPool)
+        if (temp.swimmingpool)
             newPrice += 5
 
         if (temp.meals)
@@ -72,27 +99,43 @@ function Room(props) {
             newPrice += 5
 
         temp['roomprice'] = newPrice
-        temp['roomrewards'] = newPrice * memberType[props.profile.data.data.membertype]
+        temp['roomrewards'] = newPrice * memberType[props.profile.membertype]
         setGuestCap(guestOptions);
         setVal(temp)
     }
 
     function submit(e) {
+        setLoading(true)
         e.preventDefault();
-        let data = {
-            ...val
+        let data = { ...val }
+
+        delete data['roomrewards']
+        data['noOfGuests'] = data.noOfGuests.label
+        data['noOfRooms'] = data.noOfRooms.label
+        if (data['rewards']) {
+            data['paymenttype'] = 'rewards'
+            delete data['rewards']
         }
-        console.log(data);
 
-
-        //     API({
-        //         callURL: links.hotel_detail + "{hotelid}?hotelid=" + hotelid,
-        //         callMethod: "GET",
-        //         callBack: (res) => {
-        //             console.log(res);
-        //         }
-        //     })
+        API({
+            callURL: links.book_room,
+            callMethod: "POST",
+            bodyData: data,
+            callBack: (res) => {
+                if (res.status) {
+                    setSuccess("Booked Successfully")
+                    setError(null)
+                }
+                else {
+                    setSuccess(null)
+                    setError('Booking Unsuccessfully')
+                }
+            }
+        })
+        setLoading(false);
     }
+
+
 
     return (
         <div className='d-flex flex-row'>
@@ -177,18 +220,18 @@ function Room(props) {
                                 <Elements
                                     formField={[
                                         {
-                                            id: 'ContinentalBreakfast',
+                                            id: 'continentalbreakfast',
                                             type: 'checkbox',
                                             form: 'booking_form',
-                                            value: val.ContinentalBreakfast,
+                                            value: val.continentalbreakfast,
                                             label: ' Daily Continental Breakfast',
                                             onchange: onchange,
                                         },
                                         {
-                                            id: 'swimmingPool',
+                                            id: 'swimmingpool',
                                             type: 'checkbox',
                                             form: 'booking_form',
-                                            value: val.swimmingPool,
+                                            value: val.swimmingpool,
                                             label: ' Access to Swimming Pool/Jacuzzi',
                                             onchange: onchange,
                                         },
@@ -236,9 +279,9 @@ function Room(props) {
                                     type: 'checkbox',
                                     form: 'booking_form',
                                     value: val.rewards,
-                                    label: props.profile.data.data.rewards < val.roomrewards ? 'Not enough rewards' : 'Use rewards',
+                                    label: props.profile.rewards < val.roomrewards ? 'Not enough rewards' : 'Use rewards',
                                     onchange: onchange,
-                                    disabled: props.profile.data.data.rewards < val.roomrewards
+                                    disabled: props.profile.rewards < val.roomrewards
                                 }
                             ]}
                         />

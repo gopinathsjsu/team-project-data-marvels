@@ -8,7 +8,9 @@ const dev = {
     get_hotels: devURL + "hotels/getHotels",
     hotel: devURL + "hotels",
 
-    hotel_rooms : devURL + "rooms"
+    hotel_rooms : devURL + "rooms",
+
+    book_room: devURL + "booking"
 }
 
 function getLinks() {
