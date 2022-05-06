@@ -3,7 +3,8 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 
 import Login from './component/login';
 import Signup from './component/signup';
-import Home from '../home'
+import Home from '../home';
+import Room from '../Room';
 
 function Auth(props) {
     const location = useLocation();
@@ -18,6 +19,9 @@ function Auth(props) {
             </Route>
             <Route path='/signup'>
                 <Signup />
+            </Route>
+            <Route path='/detail'>
+                <Room />
             </Route>
             <Route path='/'>
                 <Home />

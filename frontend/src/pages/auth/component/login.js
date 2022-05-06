@@ -1,121 +1,89 @@
-import React from 'react';
-import { useState } from 'react';
-import { Container, Button, TextField, Typography, Box, Grid, Link, 
-        Card, InputAdornment, IconButton, CssBaseline } from '@mui/material';
-import {Visibility, VisibilityOff} from '@mui/icons-material/';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {NavLink} from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import API from "../../../common/helper/api";
+import Elements from '../../../common/component/Element';
+import Button from '../../../common/component/Button';
 
-const theme = createTheme();
 
 export default function Login() {
-  const [val, setVal] = useState({
-    email: "",
-    password:"",
-    showPassword: false,
-  })
+	const [val, setVal] = useState({
+		email: "",
+		password: ""
+	})
 
-  function onChange(newval, id) {
-    let temp = { ...val }
-    temp[id] = newval
-    setVal(temp)
-  }
+	function onchange(newval, id) {
+		let temp = { ...val }
+		temp[id] = newval
+		setVal(temp)
+	}
 
-  function login(e) {
-    e.preventDefault();
-    let data = {
-        ...val
-    }
-    console.log(data);
-  }
+	function login(e) {
+		e.preventDefault();
+		let data = {
+			...val
+		}
+		// API({
+		//   callURL: "",
+		//   callMethod: "GET",
+		//   urlParams: {},
+		//   bodyData: data,
+		//   headers: {},
+		//   callBack: (res) => {
+		//     console.log(res);
+		//   }
+		// })
+		console.log(data);
+	}
 
-  const handleClickShowPassword = () => {
-    setVal({
-      ...val,
-      showPassword: !val.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
-      event.preventDefault();
-  };
-
-
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth={false} sx={{ bgcolor: '#E7E5EA', height: '100vh', 
-                                                          display: 'flex', flexDirection: 'row',
-                                                          justifyContent: 'center'}}>
-        <CssBaseline />
-        <Card
-          sx={{
-            maxWidth: 600,
-            height: 'fit-content',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            paddingTop: 6,
-            paddingBottom: 6,
-            paddingLeft: 15,
-            paddingRight: 15,
-            marginTop: 10
-        }}>
-          <Typography variant="h3"> Sign in</Typography>
-          <Box component="form" noValidate sx={{ mt: 3, display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'center', justifyContent: 'center' }} 
-                                                onSubmit={(e) => login(e)} id="login">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-              <TextField 
-                name="email"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                autoFocus
-                autoComplete="email"
-                value={val.email}
-                onChange={(e) => onChange(e.target.value, "email")}/>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField 
-                  name="password"
-                  required
-                  fullWidth
-                  id="password"
-                  label="Password"
-                  autoFocus
-                  autoComplete="new-password"
-                  type={val.showPassword ? 'text' : 'password'}
-                  value={val.password}
-                  onChange={(e) => onChange(e.target.value, "password")}
-                  endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {val.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }/>
-              </Grid>
-            </Grid>
-            <Button variant="contained" type="submit"
-                    width= "auto" sx={{ mt: 3, mb: 2 }}
-                    form="login">SIGN IN</Button>
-            <Grid container justifyContent="center">
-              <Grid item>
-                <NavLink to="/signup"> New User? Sign Up</NavLink>
-              </Grid>
-            </Grid>
-            
-          </Box>
-        </Card>
-      </Container>
-    </ThemeProvider>
-  )
+	return (
+		<div className='container d-flex flex-row justify-content-center align-items-center' style={{ height: '100vh' }}>
+			<div className='card col-5 shadow p-3' id='login_container'>
+				<form onSubmit={(e) => login(e)}>
+					<h1 className='d-flex flex-row justify-content-center mb-4 fw-normal'> Log in</h1>
+					<div className='row justify-content-center'>
+						<Elements
+							formField={[
+								{
+									id: 'email',
+									label: 'Email ID *',
+									type: 'email',
+									placeholder: 'Enter Registered Email ID',
+									className: 'col-7',
+									autoFocus: true,
+									requiredFlag: true,
+									value: val.email,
+									onchange: onchange,
+								},
+								{
+									id: 'password',
+									label: 'Password *',
+									type: 'password',
+									placeholder: 'Enter Password',
+									className: 'col-7',
+									requiredFlag: true,
+									value: val.password,
+									onchange: onchange
+								},
+							]}
+						/>
+					</div>
+					<div className='d-flex justify-content-center'>
+						<Button
+							text='Login'
+							type='submit'
+						// loading={loading}
+						/>
+					</div>
+				</form>
+				<div className='d-flex justify-content-center pt-3 pb-3' style={{ color: '#666666' }}>
+					<p className='mb-0'>
+						Don't have an account?
+						<NavLink to='/signup' className='text-primary ms-2'>
+							Register
+						</NavLink>
+					</p>
+				</div>
+			</div>
+		</div>
+	)
 }
