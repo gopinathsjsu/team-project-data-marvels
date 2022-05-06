@@ -18,11 +18,13 @@ public class Users {
 
     private String phone;
 
-    private Integer rewards;
+    private Double rewards;
 
     private String pass;
 
     private String userrole;
+
+    private String memberType;
 }
 /*
 create table users(
