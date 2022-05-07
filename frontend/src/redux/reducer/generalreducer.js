@@ -6,13 +6,13 @@ const GenralReducer = (state = generalstate, action) => {
         case 'SET_USERDATA':
             state = {
                 ...state,
-                profile: action.data
+                profile: action
             }
             break
         case 'SET_ROLE':
             state = {
                 ...state,
-                role: action.data
+                role: action
             }
             break
 
