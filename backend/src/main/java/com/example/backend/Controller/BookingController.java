@@ -33,19 +33,19 @@ public class BookingController {
         Double spend = 0.0;
         Double gain = 0.0;
 
-        if(user.getMemberType() == "silver") {
+        if(user.getMembertype() == "silver") {
             spend =  booking.getRoomprice() * 150;
             gain = booking.getRoomprice();
 
             if(user.getRewards() + gain > 60000) {
-                user.setMemberType("gold");
+                user.setMembertype("gold");
             }
         }
-        else if (user.getMemberType() == "gold") {
+        else if (user.getMembertype() == "gold") {
             spend =  booking.getRoomprice() * 125;
             gain = booking.getRoomprice()*1.5;
             if(user.getRewards()  + gain > 100000) {
-                user.setMemberType("platinum");
+                user.setMembertype("platinum");
             }
         }
         else {

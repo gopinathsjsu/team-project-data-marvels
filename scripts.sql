@@ -37,6 +37,8 @@ phone varchar(16),
 rewards int,
 pass varchar(64),
 userrole varchar(16)
+hotelid INT
+FOREIGN KEY (hotelid) REFERENCES hotels(hotelid)
 );
 
 create table bookings(
