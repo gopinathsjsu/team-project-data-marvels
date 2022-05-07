@@ -4,7 +4,8 @@ const dev = {
     sign_up: devURL + "users/signup",
     login: devURL + "users/signin",
 
-    get_hotels: devURL + "hotels",
+    get_hotels: devURL + "hotels/gethotels",
+    hotel: devURL + "hotels",
     search_hotel: devURL + "hotels/hotels",
     hotel_detail: devURL + "hotels/"
 }
