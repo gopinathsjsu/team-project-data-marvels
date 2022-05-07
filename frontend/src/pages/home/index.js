@@ -43,7 +43,7 @@ function Home() {
         }
 
         API({
-            callURL: links.search_hotel,
+            callURL: links.hotel,
             callMethod: "GET",
             urlParams: data,
             callBack: (res) => {

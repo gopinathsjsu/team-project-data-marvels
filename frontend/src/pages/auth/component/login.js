@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { set_userData, set_role } from '../../../redux/dispatch/dispatch';
+
 import { Elements, Button, getLinks, API } from '../../../common';
 import Signup from './signup';
+import reactSelect from 'react-select';
 
-export default function Login(props) {
+function Login(props) {
 	const links = getLinks();
 
 	const [loading, setLoading] = useState(false)
@@ -28,7 +33,14 @@ export default function Login(props) {
 			callMethod: "POST",
 			bodyData: data,
 			callBack: (res) => {
-				console.log(res);
+				if (res.status) {
+					props.set_userData(res);
+					props.set_role(res.userrole);
+				}
+				else {
+					console.log(res);
+				}
+
 			}
 		})
 
@@ -93,3 +105,18 @@ export default function Login(props) {
 		</div>
 	)
 }
+
+const mapStateToProps = (state) => { return { profile: state.greduce.profile } }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		set_userData: (options) => {
+			dispatch(set_userData(options))
+		},
+		set_role: (option) => {
+			dispatch(set_role(option))
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
