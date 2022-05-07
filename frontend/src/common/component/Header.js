@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+
+import { connect } from 'react-redux';
+
 import { Navbar, Nav } from 'react-bootstrap';
 import { Button, Modal } from '../index';
 import Login from '../../pages/auth/component/login';
 import Signup from '../../pages/auth/component/signup';
 
-function Header() {
+function Header(props) {
+    console.log(props.profile.data);
     const [modalData, setModalData] = useState({ title: '', body: '', footer: '' })
     const modalId = 'auth-modal';
 
@@ -20,21 +24,31 @@ function Header() {
                 <Nav className='d-flex flex-row me-4'>
                     <Nav.Link href='/app/reservations'>My Reservations</Nav.Link>
                     <Nav.Link href='/app/cart'>Cart</Nav.Link>
-                    <Button
-                        text='Login'
-                        variant='header-link'
-                        target={modalId}
-                        onClick={() => {
-                            let temp = {
-                                title: '',
-                                body: (
-                                    <Login modalId={modalId} setModalData={setModalData} />
-                                ),
-                            }
-                            setModalData(temp)
-                        }}
-                    />
-                    <Button
+
+                    {
+                        props.profile.data !== undefined ? <Button
+                            text='Logout'
+                            variant='header-link'
+                            onClick={() => {
+                                localStorage.clear()
+                                window.location.href = '/'
+                            }}
+                        /> : <Button
+                            text='Login / Sign up'
+                            variant='header-link'
+                            target={modalId}
+                            onClick={() => {
+                                let temp = {
+                                    title: '',
+                                    body: (
+                                        <Login modalId={modalId} setModalData={setModalData} />
+                                    ),
+                                }
+                                setModalData(temp)
+                            }}
+                        />
+                    }
+                    {/* <Button
                         text='Sign up'
                         variant='header-link'
                         target={modalId}
@@ -47,7 +61,7 @@ function Header() {
                             }
                             setModalData(temp)
                         }}
-                    />
+                    /> */}
                 </Nav>
             </Navbar>
             <Modal
@@ -60,4 +74,6 @@ function Header() {
     )
 }
 
-export default Header
+const mapStateToProps = (state) => { return { profile: state.greduce.profile } }
+
+export default connect(mapStateToProps)(Header);

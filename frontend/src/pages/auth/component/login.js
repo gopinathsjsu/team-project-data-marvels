@@ -5,12 +5,12 @@ import { set_userData, set_role } from '../../../redux/dispatch/dispatch';
 
 import { Elements, Button, getLinks, API } from '../../../common';
 import Signup from './signup';
-import reactSelect from 'react-select';
 
 function Login(props) {
 	const links = getLinks();
 
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
+	const [loginError, setLoginError] = useState(null);
 	const [val, setVal] = useState({
 		username: "tharun",
 		password: "test123"
@@ -34,11 +34,15 @@ function Login(props) {
 			bodyData: data,
 			callBack: (res) => {
 				if (res.status) {
+					setLoginError(null);
 					props.set_userData(res);
 					props.set_role(res.userrole);
+					window.bootstrap.Modal.getInstance(
+						document.getElementById(props.modalId)
+					).hide()
 				}
 				else {
-					console.log(res);
+					setLoginError(res.message);
 				}
 
 			}
@@ -76,6 +80,9 @@ function Login(props) {
 						]}
 					/>
 				</div>
+				{loginError !== null && <p>
+					<font color='red'>{loginError}</font>
+				</p>}
 				<div className='d-flex justify-content-center'>
 					<Button
 						text='Login'
@@ -95,7 +102,7 @@ function Login(props) {
 						let temp = {
 							title: '',
 							body: (
-								<Signup setModalData={props.setModalData} />
+								<Signup modalId={props.modalId} setModalData={props.setModalData} />
 							),
 						}
 						props.setModalData(temp)
