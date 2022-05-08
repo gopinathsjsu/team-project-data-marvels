@@ -1,21 +1,43 @@
 import React from 'react';
-import { Switch, Route} from 'react-router-dom';
 
-import Home from '../home';
-import Room from '../Room';
+import { connect } from 'react-redux';
 
-function Auth() {
+import { set_role, set_userData } from '../../redux/dispatch/dispatch';
 
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+import Login from './component/login';
+import SignUp from './component/signup';
+
+function Auth(props) {
+
+    if (props.profile.data, props.profile.data !== undefined) return <Redirect to='/app/home' />
     return (
         <Switch>
-            <Route path='/detail'>
-                <Room />
+            <Route path='/signup'>
+                <SignUp />
+            </Route>
+            <Route path='/login'>
+                <Login set_userData={props.set_userData} set_role={props.set_role} />
             </Route>
             <Route path='/'>
-                <Home />
+                <Login set_userData={props.set_userData} set_role={props.set_role} />
             </Route>
         </Switch>
     )
 }
 
-export default Auth;
+const mapStateToProps = (state) => { return { profile: state.greduce.profile } }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        set_userData: (options) => {
+            dispatch(set_userData(options))
+        },
+        set_role: (option) => {
+            dispatch(set_role(option))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
