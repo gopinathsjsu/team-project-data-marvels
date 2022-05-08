@@ -5,6 +5,7 @@ function getRoutes() {
     // const BookingMgmt = React.lazy(() => import('../pages/bookingmgmt/index'))
 
     const Home = React.lazy(() => import('../pages/home/index'))
+    const Profile = React.lazy(() => import('../pages/profile/index'))
     const Cart = React.lazy(() => import('../pages/cart/index'))
     // const Room = React.lazy(() => import('../pages/Room/index'))
     const Hotel = React.lazy(() => import('../pages/Hotel/index'))
@@ -15,7 +16,8 @@ function getRoutes() {
         // { path: '/app/bookingmgmt', name: 'Booking Management', component: BookingMgmt },
 
         { path: '/app/home', name: 'Home', component: Home },
-        { path: '/app/cart', name: 'Cart', component: Cart },
+        // { path: '/app/cart', name: 'Cart', component: Cart },
+        { path: '/app/profile', name: 'Profile', component: Profile },
         { path: '/app/reservations', name: 'Reservations', component: Reservations },
         { path: '/app/hotel/:hotelid', name: 'Hotel', component: Hotel },
         // { path: '/app/room/:hotelid', name: 'Room', component: Room }
