@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Button } from '../index';
 
-function Header() {
-
+function Header(props) {
+    console.log(props.profile)
     return (
         <>
             <Navbar bg="dark" variant="dark" className='d-flex flow-row justify-content-between'>
@@ -20,7 +20,8 @@ function Header() {
                 </Nav>
                 <Nav className='d-flex flex-row me-4'>
                     <NavLink className='nav-link' to='/app/reservations'>My Reservations</NavLink>
-                    <NavLink className='nav-link' to='/app/profile'>Profile</NavLink>
+                    <p className='nav-item text-white mb-0 mt-2'>Rewards: {props.profile.data.data.rewards}</p>
+                    {/* <NavLink className='nav-link' to='/app/profile'>Profile</NavLink> */}
 
                     <Button
                         text='Logout'
