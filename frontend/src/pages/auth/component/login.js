@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-
-import { set_userData, set_role } from '../../../redux/dispatch/dispatch';
+import { NavLink } from 'react-router-dom';
 
 import { Elements, Button, getLinks, API } from '../../../common';
-import Signup from './signup';
 
 function Login(props) {
 	const links = getLinks();
@@ -37,9 +34,6 @@ function Login(props) {
 					setLoginError(null);
 					props.set_userData(res);
 					props.set_role(res.userrole);
-					window.bootstrap.Modal.getInstance(
-						document.getElementById(props.modalId)
-					).hide()
 				}
 				else {
 					setLoginError(res.message);
@@ -95,35 +89,13 @@ function Login(props) {
 				<p className='mb-0 mt-1'>
 					Don't have an account?
 				</p>
-				<Button
-					text='Register'
-					variant='link'
-					onClick={() => {
-						let temp = {
-							title: '',
-							body: (
-								<Signup modalId={props.modalId} setModalData={props.setModalData} />
-							),
-						}
-						props.setModalData(temp)
-					}}
-				/>
+				<NavLink to='/signup' className='text-primary ms-2'>
+					Register
+				</NavLink>
+
 			</div>
 		</div>
 	)
 }
 
-const mapStateToProps = (state) => { return { profile: state.greduce.profile } }
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		set_userData: (options) => {
-			dispatch(set_userData(options))
-		},
-		set_role: (option) => {
-			dispatch(set_role(option))
-		}
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login;
