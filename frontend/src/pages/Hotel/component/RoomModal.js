@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import logo from '../../../assets/sample.jpg';
+import logo from '../../../assets/hotelroom.jpeg';
 import { Elements, Button, API, getLinks } from '../../../common/index';
 import { memberType } from '../../../common/component/options';
 
@@ -94,168 +94,155 @@ function Room(props) {
     }
 
     return (
-        <div className='container-fluid h-100'>
-            <div className='row' style={{ height: '100vh', maxHeight: '100vh' }}>
-                <div
-                    className='col-md-5 px-4 py-5'
-                    style={{ height: '100vh', maxHeight: '100vh' }}
-                >
-                    <div className='d-flex flex-column justify-content-center h-100'>
-                        <span>
-                            <div className='text-center mb-4'>
-                                <h4> {props.hotelDetail.hotelname} </h4>
-                                <h5> {props.hotelDetail.city} </h5>
-                            </div>
-                            <div className='text-center mb-4'>
-                                <img width='280' src={logo} alt='logo' />
-                            </div>
-                        </span>
+        <div className='d-flex flex-row'>
+            <div className='col-5 d-flex flex-column justify-content-start'>
+                <div className='d-flex flex-row justify-content-center'>
+                    <div className='d-flex flex-column justify-content-center'>
+                        <h3> {props.hotelDetail.hotelname} </h3>
+                        <h6> {props.hotelDetail.city} </h6>
                     </div>
                 </div>
-                <div
-                    className='col-md-7 overflow-auto'
-                    style={{ height: '100vh', maxHeight: '100vh', background: '#f7f7f7' }}
-                >
-                    <div className='d-flex flex-column justify-content-center h-100'>
-                        <form id='booking_form' onSubmit={(e) => submit(e)}>
-                            <div className='text-center mb-4'>
-                                <h2> Room Type </h2>
-                                <div className='row'>
-                                    <div className='col-md-6'>
-                                        <Elements formField={[{
-                                            id: 'startDate',
-                                            type: 'date',
-                                            label: 'Check In',
-                                            requiredFlag: true,
-                                            autoFocus: true,
-                                            value: val.startDate,
-                                            disabled: true,
-                                            onchange: onchange
-                                        }]} />
-                                    </div>
-                                    <div className='col-md-6'>
-                                        <Elements formField={[{
-                                            id: 'endDate',
-                                            type: 'date',
-                                            label: 'Check Out',
-                                            requiredFlag: true,
-                                            autoFocus: true,
-                                            value: val.endDate,
-                                            disabled: true,
-                                            onchange: onchange
-                                        }]} />
-                                    </div>
-                                </div>
-                                <div className='row flex'>
-                                    <div className='col-md-6'>
-                                        <Elements formField={[
-                                            {
-                                                id: 'noOfRooms',
-                                                label: 'Number of Rooms',
-                                                type: 'react_select',
-                                                autoFocus: true,
-                                                requiredFlag: true,
-                                                value: val.noOfRooms,
-                                                options: availableRooms,
-                                                valueKey: 'label',
-                                                onchange: onchange
-                                            }
-                                        ]} />
-                                    </div>
-                                    <div className='col-md-6'>
-                                        <Elements formField={[
-                                            {
-                                                id: 'noOfGuests',
-                                                label: 'Number of Guests',
-                                                type: 'react_select',
-                                                autoFocus: true,
-                                                requiredFlag: true,
-                                                value: val.noOfGuests,
-                                                options: guestCap,
-                                                valueKey: 'label',
-                                                onchange: onchange
-                                            }
-                                        ]} />
-                                    </div>
-                                </div>
-                                <div>
-                                    2 guests per room
-                                </div>
-                                <div>extra guests $10</div>
-                                <div className='row'>
-                                    <h2> Amenities </h2>
-                                    <div className='col-md-6'>
-                                        <Elements
-                                            formField={[
-                                                {
-                                                    id: 'ContinentalBreakfast',
-                                                    type: 'checkbox',
-                                                    form: 'booking_form',
-                                                    value: val.ContinentalBreakfast,
-                                                    label: 'Daily Continental Breakfast',
-                                                    onchange: onchange,
-                                                },
-                                                {
-                                                    id: 'swimmingPool',
-                                                    type: 'checkbox',
-                                                    form: 'booking_form',
-                                                    value: val.swimmingPool,
-                                                    label: 'Access to Swimming Pool/Jacuzzi',
-                                                    onchange: onchange,
-                                                },
-                                                {
-                                                    id: 'meals',
-                                                    type: 'checkbox',
-                                                    form: 'booking_form',
-                                                    value: val.meals,
-                                                    label: 'All Meals (Breakfast, Lunch, Dinner)',
-                                                    onchange: onchange,
-                                                }
-                                            ]}
-                                        />
-                                    </div>
-                                    <div className='col-md-6'>
-                                        <Elements
-                                            formField={[
-                                                {
-                                                    id: 'fitnessRoom',
-                                                    type: 'checkbox',
-                                                    form: 'booking_form',
-                                                    value: val.fitnessRoom,
-                                                    label: 'Access to Fitness Room',
-                                                    onchange: onchange,
-                                                },
-                                                {
-                                                    id: 'parking',
-                                                    type: 'checkbox',
-                                                    form: 'booking_form',
-                                                    value: val.parking,
-                                                    label: 'Parking',
-                                                    onchange: onchange,
-                                                }
-                                            ]}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                Total Cost ${price}
-                            </div>
-                            <div className='d-flex justify-content-center'>
-                                <Button
-                                    text='Book'
-                                    type='submit'
-                                />
-                                <Button
-                                    text={rewards + ' rewards required'}
-                                    disabled={props.profile.data.data.rewards < rewards}
-                                />
-                            </div>
-                        </form>
-                    </div>
+                <div className='d-flex flex-row justify-content-center mb-4'>
+                    <img className='col-10' src={logo} alt='logo' />
                 </div>
             </div>
-        </div>
+            <div className='d-flex flex-column col-7 justify-content-center'>
+                <form id='booking_form' onSubmit={(e) => submit(e)}>
+                    <div className='mb-4'>
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <Elements formField={[{
+                                    id: 'startDate',
+                                    type: 'date',
+                                    label: 'Check In',
+                                    requiredFlag: true,
+                                    autoFocus: true,
+                                    value: val.startDate,
+                                    disabled: true,
+                                    onchange: onchange
+                                }]} />
+                            </div>
+                            <div className='col-md-6'>
+                                <Elements formField={[{
+                                    id: 'endDate',
+                                    type: 'date',
+                                    label: 'Check Out',
+                                    requiredFlag: true,
+                                    autoFocus: true,
+                                    value: val.endDate,
+                                    disabled: true,
+                                    onchange: onchange
+                                }]} />
+                            </div>
+                        </div>
+                        <div className='row flex'>
+                            <div className='col-md-6 text-center'>
+                                <Elements formField={[
+                                    {
+                                        id: 'noOfRooms',
+                                        label: 'Number of Rooms',
+                                        type: 'react_select',
+                                        autoFocus: true,
+                                        requiredFlag: true,
+                                        value: val.noOfRooms,
+                                        options: availableRooms,
+                                        valueKey: 'label',
+                                        onchange: onchange
+                                    }
+                                ]} />
+                            </div>
+                            <div className='col-md-6 text-center'>
+                                <Elements formField={[
+                                    {
+                                        id: 'noOfGuests',
+                                        label: 'Number of Guests',
+                                        type: 'react_select',
+                                        autoFocus: true,
+                                        requiredFlag: true,
+                                        value: val.noOfGuests,
+                                        options: guestCap,
+                                        valueKey: 'label',
+                                        onchange: onchange
+                                    }
+                                ]} />
+                            </div>
+                        </div>
+                        <div className='d-flex flex-start mt-2'>
+                            <p>( * Note: 2 guests per room. Extra $10/guest )</p>
+                        </div>
+                        <div className='row'>
+                            <h5> Amenities: </h5>
+                            <div className='col-md-6'>
+                                <Elements
+                                    formField={[
+                                        {
+                                            id: 'ContinentalBreakfast',
+                                            type: 'checkbox',
+                                            form: 'booking_form',
+                                            value: val.ContinentalBreakfast,
+                                            label: ' Daily Continental Breakfast',
+                                            onchange: onchange,
+                                        },
+                                        {
+                                            id: 'swimmingPool',
+                                            type: 'checkbox',
+                                            form: 'booking_form',
+                                            value: val.swimmingPool,
+                                            label: ' Access to Swimming Pool/Jacuzzi',
+                                            onchange: onchange,
+                                        },
+                                        {
+                                            id: 'meals',
+                                            type: 'checkbox',
+                                            form: 'booking_form',
+                                            value: val.meals,
+                                            label: ' All Meals (Breakfast, Lunch, Dinner)',
+                                            onchange: onchange,
+                                        }
+                                    ]}
+                                />
+                            </div>
+                            <div className='col-md-6'>
+                                <Elements
+                                    formField={[
+                                        {
+                                            id: 'fitnessRoom',
+                                            type: 'checkbox',
+                                            form: 'booking_form',
+                                            value: val.fitnessRoom,
+                                            label: ' Access to Fitness Room',
+                                            onchange: onchange,
+                                        },
+                                        {
+                                            id: 'parking',
+                                            type: 'checkbox',
+                                            form: 'booking_form',
+                                            value: val.parking,
+                                            label: ' Parking',
+                                            onchange: onchange,
+                                        }
+                                    ]}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='d-flex flex-row justify-content-start'>
+                        <h5>Total Cost: ${price}</h5>
+                    </div>
+                    <div className='d-flex flex-row justify-content-evenly mt-2'>
+                        <Button
+                            text='Book'
+                            type='submit'
+                        // loading={loading}
+                        />
+                        <Button
+                            text={rewards + ' rewards required'}
+                            disabled={props.profile.data.data.rewards < rewards}
+                        />
+                    </div>
+                </form>
+            </div >
+        </div >
     );
 }
 

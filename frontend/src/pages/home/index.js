@@ -11,8 +11,8 @@ function Home(props) {
 
     const [val, setVal] = useState({
         city: 'Chennai',
-        startdate: '2022-05-09',
-        enddate: '2022-05-10',
+        startdate: '2022-05-10',
+        enddate: '2022-05-12',
     })
 
     const [hotelResult, setHotelResult] = useState([])

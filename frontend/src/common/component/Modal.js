@@ -9,7 +9,7 @@ function Modal(props) {
             tabIndex={-1}
             data-bs-backdrop='static'
         >
-            <div className='modal-dialog modal-dialog-centered modal-dialog-scrollable'>
+            <div className='modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl'>
                 <div className='modal-content'>
                     {props.title !== undefined ? (
                         <div className='modal-header'>

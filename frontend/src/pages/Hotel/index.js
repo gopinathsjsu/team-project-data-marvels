@@ -44,18 +44,25 @@ function Hotel(props) {
     return (
         <>
             <div className='container d-flex flex-column justify-content-center p-4'>
-                <h1>{hotelDetail.hotelname}</h1>
-                <h3>{hotelDetail.address}</h3>
-                <h4>{hotelDetail.city}</h4>
-                <h4>{hotelDetail.country}</h4>
-                <h5>Rating {hotelDetail.stars}</h5>
-                <Rooms
-                    hotelDetail={hotelDetail}
-                    data={rooms}
-                    modalId={modalId}
-                    setModalData={setModalData}
-                    set_hotelData={props.set_hotelData}
-                />
+                <div className='d-flex flex-row justify-content-between align-items-center m-4'>
+                    <div className='d-flex flex-column mb-0'>
+                        <h3>{hotelDetail.hotelname}</h3>
+                        <h6>{hotelDetail.address}</h6>
+                        <h6>{hotelDetail.city}<span>, {hotelDetail.country}</span></h6>
+                    </div>
+                    <div className='d-flex me-4'>
+                        <h5>Rating: {hotelDetail.stars}</h5>
+                    </div>
+                </div>
+                <div className='d-flex flex-row flex-wrap justify-content-center'>
+                    <Rooms
+                        hotelDetail={hotelDetail}
+                        data={rooms}
+                        modalId={modalId}
+                        setModalData={setModalData}
+                        set_hotelData={props.set_hotelData}
+                    />
+                </div>
             </div>
             <Modal
                 title={modalData.title}

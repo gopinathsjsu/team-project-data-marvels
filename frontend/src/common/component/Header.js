@@ -8,7 +8,6 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Button } from '../index';
 
 function Header(props) {
-    console.log(props.profile)
     return (
         <>
             <Navbar bg="dark" variant="dark" className='d-flex flow-row justify-content-between'>
@@ -20,7 +19,7 @@ function Header(props) {
                 </Nav>
                 <Nav className='d-flex flex-row me-4'>
                     <NavLink className='nav-link' to='/app/reservations'>My Reservations</NavLink>
-                    <p className='nav-item text-white mb-0 mt-2'>Rewards: {props.profile.data.data.rewards}</p>
+                    <p className='nav-item text-white-50 mb-0 mt-2'>Rewards: {props.profile.data.data.rewards}</p>
                     {/* <NavLink className='nav-link' to='/app/profile'>Profile</NavLink> */}
 
                     <Button

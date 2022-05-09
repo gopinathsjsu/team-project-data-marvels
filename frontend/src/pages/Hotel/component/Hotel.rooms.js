@@ -12,12 +12,13 @@ function Rooms(props) {
         <>
             {
                 props.data.map((item, index) => (
-                    <div key={index} className='card shadow-sm m-3 p-3'>
+
+                    <div key={index} className='card shadow-sm m-4 p-4 col-5'>
                         <img src={room_image} className='card-img' />
-                        <h4 className='mb-0'>{roomType[item.roomtypeid]}</h4>
-                        <div className='d-flex flex-row justify-content-between mt-2 mb-3'>
-                            <div className='col-8 d-flex flex-column'>
-                                <h5>Number of rooms available: {item.available}</h5>
+                        <div className='d-flex flex-row justify-content-between mt-1'>
+                            <div>
+                                <h4 className='mb-2'>{roomType[item.roomtypeid]}</h4>
+                                <h6>Available: {item.available}</h6>
                             </div>
                             <div className='d-flex align-self-center'>
                                 <h4>Starts with ${item.roomprice}</h4>
@@ -28,7 +29,7 @@ function Rooms(props) {
                                 target={props.modalId}
                                 variant='outline'
                                 id='details'
-                                text='Book room'
+                                text='See Details'
                                 onClick={() => {
                                     let temp = {
                                         ...{
@@ -46,6 +47,7 @@ function Rooms(props) {
                             />
                         </div>
                     </div>
+
                 ))
             }
 
