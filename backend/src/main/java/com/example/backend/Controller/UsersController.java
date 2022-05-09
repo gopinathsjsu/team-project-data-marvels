@@ -28,7 +28,7 @@ public class UsersController {
     @PostMapping("/signin")
     public ResponseEntity getUserById(@RequestBody LoginRequest user){
         Users users = usersRepository.findByUsername(user.getUsername());
-        if(user.getPassword()!= users.getPass()){
+        if(!user.getPassword().equals(users.getPass())){
             return ResponseEntity.badRequest().body("Error: Invalid Credentials");
         }
         return users != null ? ResponseEntity.ok(users) : ResponseEntity.badRequest().body("Error: User Not Found");

@@ -13,6 +13,13 @@ public interface HotelRepository extends JpaRepository<Hotels, Integer> {
     List<Hotels> findByCity(String city);
     @Query(value = "select h.*, r.roomid,r.roomtypeid, r.roomprice from hotels h\n" +
             "join rooms r on h.hotelid = r.hotelid where r.roomid not in (\n" +
-            "select roomid from bookings b where ?2 between b.startDate and b.endDate) and city = ?1", nativeQuery = true)
+            "select roomid from bookings b where ?2 between b.startDate and b.endDate " +
+            "and ?3 between b.startDate and b.endDate) and city = ?1", nativeQuery = true)
     List<Map<String, Object>> findnewhotels(String city, LocalDate start, LocalDate end);
+
+    @Query(value = "select h.*, r.roomid,r.roomtypeid, r.roomprice from hotels h\n" +
+            "join rooms r on h.hotelid = r.hotelid where r.roomid not in (\n" +
+            "select roomid from bookings b where ?1 between b.startDate and b.endDate " +
+            "and ?2 between b.startDate and b.endDate)", nativeQuery = true)
+    List<Map<String, Object>> findnewhotelsWithoutCity(LocalDate start, LocalDate end);
 }

@@ -23,10 +23,12 @@ public class HotelsController {
     @Autowired
     private HotelRepository hotelRepository;
 
-    @GetMapping(value = "/getHotels")
-    public List<Hotels> getHotels() {
-        return hotelRepository.findAll();
-    }
+//    @GetMapping(value = "/getHotels")
+//    public List<Map<String, Object>> getHotels(@RequestParam(value = "city") String city,
+//                                  @RequestParam(value = "startdate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
+//                                  @RequestParam(value = "enddate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) {
+//        return hotelRepository.findnewhotels(city, start, end);
+//    }
 
     @GetMapping(value = "/{hotelid}")
     public Optional<Hotels> getHotelByID(@QueryParam(value = "hotelid") Integer hotelid) {
@@ -37,13 +39,18 @@ public class HotelsController {
     }
 
     @GetMapping
-    public List<Map<String, Object>> getHotelsByCity(@RequestParam(value = "city") String city,
+    public List<Map<String, Object>> getHotelsByCity(@RequestParam(value = "city", required = false) String city,
                                           @RequestParam(value = "startdate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
                                           @RequestParam(value = "enddate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) {
 //        return hotelRepository.findByCity(city);
-        List<Map<String, Object>> c = hotelRepository.findnewhotels(city,start,end);
+        if(city == null) {
+            System.out.println("hi");
+        }
+        List<Map<String, Object>> c = city == null ? hotelRepository.findnewhotelsWithoutCity(start, end)
+                : hotelRepository.findnewhotels(city,start,end);
+//        List<Map<String, Object>> c = hotelRepository.findnewhotels(city,start,end);
 //        Boolean cc = start.getDayOfWeek() == Calendar.SATURDAY || start.getDayOfWeek() == Calendar.SUNDAY;
-        System.out.println("hi");
+
         return c;
     }
 
