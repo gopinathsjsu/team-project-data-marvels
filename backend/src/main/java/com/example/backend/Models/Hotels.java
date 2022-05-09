@@ -24,6 +24,8 @@ public class Hotels {
 
     private Double stars;
 
+    private Boolean active;
+
 //    @OneToMany(targetEntity=Rooms.class, mappedBy="hotelid", fetch= FetchType.EAGER)
 //    private List<Rooms> roomsList;
 }

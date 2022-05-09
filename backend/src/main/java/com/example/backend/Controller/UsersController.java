@@ -61,6 +61,8 @@ public class UsersController {
 
     @DeleteMapping("/{userid}")
     public String deleteUserById(@RequestParam(value = "userid") Integer userid){
+        Users users = usersRepository.getById(userid);
+        users.setActive(false);
         usersRepository.deleteById(userid);
         return "User got deleted successfully";
     }

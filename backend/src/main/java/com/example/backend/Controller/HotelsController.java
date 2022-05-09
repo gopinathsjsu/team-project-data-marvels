@@ -3,6 +3,7 @@ package com.example.backend.Controller;
 import com.example.backend.ModelDTO.HotelDTO;
 import com.example.backend.Models.Hotels;
 import com.example.backend.Repository.HotelRepository;
+import jdk.vm.ci.meta.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -40,14 +41,16 @@ public class HotelsController {
 
     @GetMapping
     public List<Map<String, Object>> getHotelsByCity(@RequestParam(value = "city", required = false) String city,
-                                          @RequestParam(value = "startdate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
-                                          @RequestParam(value = "enddate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) {
+                                          @RequestParam(value = "startdate", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
+                                          @RequestParam(value = "enddate", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) {
 //        return hotelRepository.findByCity(city);
         if(city == null) {
             System.out.println("hi");
         }
-        List<Map<String, Object>> c = city == null ? hotelRepository.findnewhotelsWithoutCity(start, end)
-                : hotelRepository.findnewhotels(city,start,end);
+        LocalDate s = start == null ? LocalDate.now() : start;
+        LocalDate e = end == null ? LocalDate.now() : end;
+        List<Map<String, Object>> c = city == null ? hotelRepository.findAvailableHotelsWithoutCity(s, e)
+                : hotelRepository.findAvailableHotelsBycity(city,s,e);
 //        List<Map<String, Object>> c = hotelRepository.findnewhotels(city,start,end);
 //        Boolean cc = start.getDayOfWeek() == Calendar.SATURDAY || start.getDayOfWeek() == Calendar.SUNDAY;
 
@@ -63,12 +66,15 @@ public class HotelsController {
         hotel.setState(hotelDTO.getState());
         hotel.setCountry(hotelDTO.getCountry());
         hotel.setStars(0.0);
+//        hotel.setActive(true);
         return hotelRepository.save(hotel);
     }
 
     @DeleteMapping
-    public String deleteHotel(@RequestParam(value = "hotelid") Integer hotelid) {
-        hotelRepository.deleteById(hotelid);
+    public String deleteHotel(@QueryParam(value = "hotelid") Integer hotelid) {
+        Hotels hotels = hotelRepository.getById(hotelid);
+        hotels.setActive(false);
+        hotelRepository.save(hotels);
         return "Successfully deleted the hotel";
     }
 }

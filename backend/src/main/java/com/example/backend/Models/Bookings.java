@@ -1,5 +1,6 @@
 package com.example.backend.Models;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,5 +31,7 @@ public class Bookings {
     private Double roomprice;
 
     private String paymenttype;
+
+    private Boolean active;
 
 }

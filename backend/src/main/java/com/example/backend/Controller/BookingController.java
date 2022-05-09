@@ -66,7 +66,9 @@ public class BookingController {
 
     @DeleteMapping(value = "/{bookingid}")
     public String deleteBooking(@QueryParam(value = "bookingid") Integer bookingid) {
-        bookingsRepository.deleteById(bookingid);
+        Bookings bookings = bookingsRepository.getById(bookingid);
+        bookings.setActive(false);
+        bookingsRepository.save(bookings);
         return "Booking cancelled successfully";
     }
 

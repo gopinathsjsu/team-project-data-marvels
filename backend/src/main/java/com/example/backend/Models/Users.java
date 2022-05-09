@@ -25,6 +25,8 @@ public class Users {
     private String userrole;
 
     private String membertype;
+
+    private Boolean active;
 }
 /*
 create table users(
