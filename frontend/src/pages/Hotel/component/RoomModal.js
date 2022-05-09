@@ -297,6 +297,9 @@ function Room(props) {
                             loading={loading}
                         />
                     </div>
+                    {error !== null && <div className="alert alert-danger" role="alert">
+                        {error}
+                    </div>}
                 </form>
             </div >
         </div >
