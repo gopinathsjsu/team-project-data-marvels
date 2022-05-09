@@ -25,6 +25,10 @@ function Variant(variant, color, size) {
 			return 'btn-outline' + color + ' btn-icon-circle ' + size
 		case 'icon':
 			return 'btn border-0 text' + color + ' ' + size
+		case 'link':
+			return 'btn-link' + ' ' + size
+		case 'header-link':
+			return 'btn-link text-white' + ' ' + size
 		default:
 			return 'btn' + color + ' ' + size
 	}
@@ -72,6 +76,7 @@ function Button(props) {
 			style={props.style !== undefined ? props.style : null}
 			data-bs-toggle={props.target ? 'modal' : null}
 			data-bs-target={props.target ? '#' + props.target : null}
+			data-bs-dismiss={props.modalDismiss ? 'modal' : null}
 		>
 			{props.loading === true ? (
 				<span className='spinner-border spinner-border-sm me-1'></span>

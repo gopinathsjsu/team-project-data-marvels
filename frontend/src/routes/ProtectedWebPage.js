@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import getRoutes from '../routes/routes';
 
-function ProtectedWebPage(props) {
+function ProtectedWebPage() {
     return (
         <div className='page-content h-100'>
             <div className='container-fluid p-2 p-md-4'>
@@ -10,7 +10,6 @@ function ProtectedWebPage(props) {
                 <React.Suspense>
                     <Switch>
                         {getRoutes().map((route, idx) => {
-                            console.log(route, idx);
                             return (
                                 route.component && (
                                     <Route

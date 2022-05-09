@@ -6,12 +6,16 @@ async function API(entity) {
         baseURL: entity.callURL,
         method: entity.callMethod,
         data: entity.bodyData,
-        // params: { ...entity.urlParams },
+        params: { ...entity.urlParams },
         // headers: { ...entity.headers }
     }).then((res) => {
-        return entity.callBack(res.data);
+        let data = { ...res, status: true }
+
+        return entity.callBack(data);
     }).catch((err) => {
-        return entity.callBack(err.response.data);
+        let data = { status: false, message: err.response.data }
+
+        return entity.callBack(data);
     })
 }
 

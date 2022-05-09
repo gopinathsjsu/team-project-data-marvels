@@ -1,12 +1,16 @@
 import React from 'react';
 
 function getRoutes() {
-    const Login = React.lazy(() => import('../pages/auth/component/login'))
-    const Signup = React.lazy(() => import('../pages/auth/component/signup'))
+    const Hotel = React.lazy(() => import('../pages/hotels/index'))
+    const Cart = React.lazy(() => import('../pages/cart/index'))
+    const BookingMgmt = React.lazy(() => import('../pages/bookingmgmt/index'))
+    const Reservations = React.lazy(() => import('../pages/reservations/index'))
 
     let routes = [
-        { path: '/login', name: 'Login', component: Login },
-        { path: '/signup', name: 'Sign Up', component: Signup }
+        { path: '/app/hotels', name: 'Hotel', component: Hotel },
+        { path: '/app/cart', name: 'Cart', component: Cart },
+        { path: '/app/bookingmgmt', name: 'Booking Management', component: BookingMgmt },
+        { path: '/app/reservations', name: 'Reservations', component: Reservations },
     ]
 
     return routes

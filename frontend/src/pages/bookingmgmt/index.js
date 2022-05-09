@@ -1,12 +1,27 @@
-import React from 'react';
-import { Button } from '../../common/index';
+import React, { useState } from 'react';
+import { Button, Elements } from '../../common/index';
+import { roomStatus } from './../../common/component/options';
 
 function BookingMgmt() {
+    const [val, setVal] = useState({
+        reservationNumber: '',
+        customerName: '',
+        hotelName: '',
+        roomType: '',
+        quantity: '',
+        price: '',
+        roomStatus: { label: 'Change Status', value: '0' },
+    })
+    function onchange(newval, id) {
+        let temp = { ...val }
+        temp[id] = newval
+        setVal(temp)
+    }
     return (
         <div className='container d-flex flex-column justify-content-center p-4'>
             <h2>Manage Reservations</h2>
             <ul className='list-group list-group-flush mt-2'>
-                <li className='list-group-item d-flex flex-row justify-content-between mt-3' style={{ backgroundColor: '#E7E5EA', border: '1px solid rgba(0,0,0,.125)', borderWidth: '0 0 1px' }}>
+                <li className='list-group-item d-flex flex-row justify-content-between mt-3 border-bottom-1' style={{ backgroundColor: '#E7E5EA' }}>
                     <div className='col-4 d-flex flex-column justify-content-around'>
                         <h6>Reservation No.:#</h6>
                         <div className='d-flex flex-row justify-content-between'>
@@ -20,11 +35,17 @@ function BookingMgmt() {
                         <p className='mb-0'>Price: $<span>100</span></p>
                     </div>
                     <div className='d-flex flex-column justify-content-center'>
-                        <select className='form-select'>
-                            <option selected>Change Status</option>
-                            <option value='Checked In'>Checked In</option>
-                            <option value='Checked Out'>Checked Out</option>
-                        </select>
+                        <Elements formField={[
+                            {
+                                id: 'roomStatus',
+                                type: 'react_select',
+                                autoFocus: true,
+                                requiredFlag: true,
+                                value: val.roomStatus,
+                                options: roomStatus,
+                                onchange: onchange
+                            }
+                        ]} />
                     </div>
                     <div className='d-flex flex-column justify-content-center'>
                         <Button id='save' text='Save' />
@@ -33,7 +54,7 @@ function BookingMgmt() {
                         <Button id='cancel' color='danger' text='Cancel Reservation' />
                     </div>
                 </li>
-                <li className='list-group-item d-flex flex-row justify-content-between mt-3' style={{ backgroundColor: '#E7E5EA', border: '1px solid rgba(0,0,0,.125)', borderWidth: '0 0 1px' }}>
+                <li className='list-group-item d-flex flex-row justify-content-between mt-3 border-bottom-1' style={{ backgroundColor: '#E7E5EA' }}>
                     <div className='col-4 d-flex flex-column justify-content-around'>
                         <h6>Reservation No.:#</h6>
                         <div className='d-flex flex-row justify-content-between'>
@@ -47,11 +68,17 @@ function BookingMgmt() {
                         <p className='mb-0'>Price: $<span>100</span></p>
                     </div>
                     <div className='d-flex flex-column justify-content-center'>
-                        <select className='form-select'>
-                            <option selected>Change Status</option>
-                            <option value='Checked In'>Checked In</option>
-                            <option value='Checked Out'>Checked Out</option>
-                        </select>
+                        <Elements formField={[
+                            {
+                                id: 'roomStatus',
+                                type: 'react_select',
+                                autoFocus: true,
+                                requiredFlag: true,
+                                value: val.roomStatus,
+                                options: roomStatus,
+                                onchange: onchange
+                            }
+                        ]} />
                     </div>
                     <div className='d-flex flex-column justify-content-center'>
                         <Button id='save' text='Save' />
