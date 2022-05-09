@@ -141,7 +141,7 @@ function Room(props) {
     return (
         <div className='d-flex flex-row'>
             <div className='col-5 d-flex flex-column justify-content-start'>
-                <div className='d-flex flex-row justify-content-center'>
+                <div className='d-flex flex-row justify-content-start ms-5'>
                     <div className='d-flex flex-column justify-content-center'>
                         <h3> {props.hotelDetail.hotelname} </h3>
                         <h6> {props.hotelDetail.city} </h6>
