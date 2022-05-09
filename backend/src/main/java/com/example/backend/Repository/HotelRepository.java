@@ -32,23 +32,25 @@ public interface HotelRepository extends JpaRepository<Hotels, Integer> {
 //            ") c where hotelid = ?1", nativeQuery = true)
 //    List<Map<String, Object>> findAvailableRoomsByHotel(Integer hotelid, LocalDate start, LocalDate end);
 
-    @Query(value = " select h.hotelid, hotelname, address, country, stars, city, [state] from (\n" +
+    @Query(value = " select h.hotelid, hotelname, address, country, stars, city, state from (\n" +
             "select r.*, b.booked from rooms r \n" +
             "left join (\n" +
             " select hotelid, roomtypeid\n" +
-            " ,sum(numberofrooms)as booked from bookings where ?2 BETWEEN startDate and endDate or ?3 BETWEEN startDate and endDate\n" +
+            " ,sum(numberofrooms)as booked from bookings where '2021-08-2' BETWEEN startDate and endDate or '2021-08-18' BETWEEN startDate and endDate\n" +
             " group by hotelid, roomtypeid) b on r.hotelid = b.hotelid and r.roomtypeid = b.roomtypeid\n" +
             ") c\n" +
-            "join hotels h on c.hotelid = h.hotelid where city = ?1 group by h.hotelid, hotelname, address, country, stars, city, [state]\n", nativeQuery = true)
+            "join hotels h on c.hotelid = h.hotelid \n" +
+            "where city = 'chennai'\n" +
+            "group by h.hotelid, hotelname, address, country, stars, city, state", nativeQuery = true)
     List<Map<String, Object>> findAvailableHotelsBycity(String city, LocalDate start, LocalDate end);
 
-    @Query(value = " select h.hotelid, hotelname, address, country, stars, city, [state] from (\n" +
+    @Query(value = " select h.hotelid, hotelname, address, country, stars, city, state from (\n" +
             "select r.*, b.booked from rooms r \n" +
             "left join (\n" +
             " select hotelid, roomtypeid\n" +
             " ,sum(numberofrooms)as booked from bookings where ?1 BETWEEN startDate and endDate or ?2 BETWEEN startDate and endDate\n" +
             " group by hotelid, roomtypeid) b on r.hotelid = b.hotelid and r.roomtypeid = b.roomtypeid\n" +
             ") c\n" +
-            "join hotels h on c.hotelid = h.hotelid group by h.hotelid, hotelname, address, country, stars, city, [state]\n", nativeQuery = true)
+            " join hotels h on c.hotelid = h.hotelid group by h.hotelid, hotelname, address, country, stars, city, state\n", nativeQuery = true)
     List<Map<String, Object>> findAvailableHotelsWithoutCity(LocalDate start, LocalDate end);
 }
