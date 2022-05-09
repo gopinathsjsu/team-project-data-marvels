@@ -25,17 +25,17 @@ public class HotelsController {
     @Autowired
     private HotelRepository hotelRepository;
 
-    @GetMapping
-    public List<Hotels> getHotels() {
-        return hotelRepository.findAll();
-    }
+//    @GetMapping
+//    public List<Hotels> getHotels() {
+//        return hotelRepository.findAll();
+//    }
 
     @GetMapping(value = "/{hotelid}")
     public Optional<Hotels> getHotelByID(@QueryParam(value = "hotelid") Integer hotelid) {
         return hotelRepository.findById(hotelid);
     }
 
-    @GetMapping(value ="/hotels")
+    @GetMapping
     public List<Map<String, Object>> getHotelsByCity(@RequestParam(value = "city") String city,
                                           @RequestParam(value = "startdate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate start,
                                           @RequestParam(value = "enddate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) {
@@ -46,7 +46,14 @@ public class HotelsController {
     }
 
     @PostMapping
-    public Hotels addHotel(@RequestBody Hotels hotel) {
+    public Hotels addHotel(@RequestBody HotelDTO hotelDTO) {
+        Hotels hotel = new Hotels();
+        hotel.setAddress(hotelDTO.getAddress());
+        hotel.setHotelname(hotelDTO.getHotelname());
+        hotel.setCity(hotelDTO.getCity());
+        hotel.setState(hotelDTO.getState());
+        hotel.setCountry(hotelDTO.getCountry());
+        hotel.setStars(0.0);
         return hotelRepository.save(hotel);
     }
 
