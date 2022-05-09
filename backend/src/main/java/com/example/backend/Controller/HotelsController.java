@@ -51,6 +51,8 @@ public class HotelsController {
         LocalDate e = end == null ? LocalDate.now() : end;
         List<Map<String, Object>> c = city == null ? hotelRepository.findAvailableHotelsWithoutCity(s, e)
                 : hotelRepository.findAvailableHotelsBycity(city,s,e);
+
+
 //        List<Map<String, Object>> c = hotelRepository.findnewhotels(city,start,end);
 //        Boolean cc = start.getDayOfWeek() == Calendar.SATURDAY || start.getDayOfWeek() == Calendar.SUNDAY;
 
