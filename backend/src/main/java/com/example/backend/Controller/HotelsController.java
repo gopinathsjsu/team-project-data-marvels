@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.ws.rs.QueryParam;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -25,13 +23,16 @@ public class HotelsController {
     @Autowired
     private HotelRepository hotelRepository;
 
-//    @GetMapping
-//    public List<Hotels> getHotels() {
-//        return hotelRepository.findAll();
-//    }
+    @GetMapping(value = "/getHotels")
+    public List<Hotels> getHotels() {
+        return hotelRepository.findAll();
+    }
 
     @GetMapping(value = "/{hotelid}")
     public Optional<Hotels> getHotelByID(@QueryParam(value = "hotelid") Integer hotelid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 0);
+        map.put("data", hotelRepository.findById(hotelid));
         return hotelRepository.findById(hotelid);
     }
 
@@ -41,6 +42,7 @@ public class HotelsController {
                                           @RequestParam(value = "enddate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate end) {
 //        return hotelRepository.findByCity(city);
         List<Map<String, Object>> c = hotelRepository.findnewhotels(city,start,end);
+//        Boolean cc = start.getDayOfWeek() == Calendar.SATURDAY || start.getDayOfWeek() == Calendar.SUNDAY;
         System.out.println("hi");
         return c;
     }
