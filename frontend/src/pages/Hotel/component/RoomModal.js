@@ -271,8 +271,8 @@ function Room(props) {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        Rewards requried {val.roomrewards}
+                    <div className='d-flex flex-column'>
+                        <h6>Rewards requried {val.roomrewards}</h6>
                         <Elements
                             formField={[
                                 {
@@ -287,7 +287,7 @@ function Room(props) {
                             ]}
                         />
                     </div>
-                    <div className='d-flex flex-row justify-content-start'>
+                    <div className='d-flex flex-row justify-content-start mt-4'>
                         <h5>Total Cost: ${val.roomprice}</h5>
                     </div>
                     <div className='d-flex flex-row justify-content-evenly mt-2'>
