@@ -29,7 +29,6 @@ function Hotelmodal() {
             callMethod: "POST",
             bodyData: data,
             callBack: (res) => {
-                console.log(res);
             }
         })
     }

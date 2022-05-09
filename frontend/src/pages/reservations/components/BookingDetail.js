@@ -5,7 +5,6 @@ import { roomType } from '../../../common/component/options';
 function Bookings(props) {
 
     function deleteBooking(bookingId) {
-        console.log(bookingId);
     }
 
     return (
