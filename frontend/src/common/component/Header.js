@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ function Header(props) {
                     <NavLink className='navbar-brand' to='/app/home'>Marvel Hotels</NavLink>
                     {/* <NavLink className='nav-link' to='/app'>Home</NavLink> */}
                     {/* <NavLink className='nav-link' to='/app/hotels'>Hotels</NavLink> */}
-                    <NavLink className='nav-link' to='/app/manageBooking'>Manage Reservations</NavLink>
+                    {props.profile.userrole !== 'Customer' && <NavLink className='nav-link' to='/app/manageBooking'>Manage Reservations</NavLink>}
                 </Nav>
                 <Nav className='d-flex flex-row me-4'>
                     <NavLink className='nav-link' to='/app/reservations'>My Reservations</NavLink>

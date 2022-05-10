@@ -20,7 +20,6 @@ function Room(props) {
         { label: 2 },
         { label: 3 }
     ])
-
     const [val, setVal] = useState({
         hotelid: props.hotelDetail.hotelid,
         roomtypeid: props.roomDetail.roomtypeid,
@@ -37,8 +36,8 @@ function Room(props) {
         parking: false,
         fitnessRoom: false,
         rewards: false,
-        noOfGuests: { label: 2 },
-        noOfRooms: { label: 1 },
+        numberofguests: { label: 2 },
+        numberofrooms: { label: 1 },
         roomrewards: props.roomDetail.roomprice * memberType[props.profile.membertype],
     })
 
@@ -59,8 +58,8 @@ function Room(props) {
             parking: false,
             fitnessRoom: false,
             rewards: false,
-            noOfGuests: { label: 2 },
-            noOfRooms: { label: 1 },
+            numberofguests: { label: 2 },
+            numberofrooms: { label: 1 },
             roomrewards: props.roomDetail.roomprice * memberType[props.profile.membertype],
         })
     }, [props])
@@ -68,17 +67,19 @@ function Room(props) {
     function onchange(newval, id) {
         let temp = { ...val }
         temp[id] = newval
-        let guests = temp.noOfRooms.label * 2 + temp.noOfRooms.label;
+        let guests = temp.numberofrooms.label * 2 + temp.numberofrooms.label;
         let guestOptions = []
         for (let index = 1; index <= guests; index++) {
             guestOptions.push({ label: index })
         }
 
-        if (id !== 'noOfGuests')
-            temp.noOfGuests = { label: 2 * temp.noOfRooms.label }
+        if (id !== 'numberofguests')
+            temp.numberofguests = { label: 2 * temp.numberofrooms.label }
 
-        let newPrice = props.roomDetail.roomprice
-        let extraGuests = temp.noOfGuests.label - (temp.noOfRooms.label * 2)
+        setGuestCap(guestOptions);
+
+        let newPrice = props.roomDetail.roomprice * temp.numberofrooms.label
+        let extraGuests = temp.numberofguests.label - (temp.numberofrooms.label * 2)
 
         if (extraGuests > 0)
             newPrice += (10 * extraGuests)
@@ -100,7 +101,6 @@ function Room(props) {
 
         temp['roomprice'] = newPrice
         temp['roomrewards'] = newPrice * memberType[props.profile.membertype]
-        setGuestCap(guestOptions);
         setVal(temp)
     }
 
@@ -110,10 +110,11 @@ function Room(props) {
         let data = { ...val }
 
         delete data['roomrewards']
-        data['noOfGuests'] = data.noOfGuests.label
-        data['noOfRooms'] = data.noOfRooms.label
+        data['numberofguests'] = data.numberofguests.label
+        data['numberofrooms'] = data.numberofrooms.label
         if (data['rewards']) {
-            data['paymenttype'] = 'rewards'
+            data['paymenttype'] = 'points'
+            data['roomprice'] = data['rewards']
             delete data['rewards']
         }
 
@@ -184,12 +185,12 @@ function Room(props) {
                             <div className='col-md-6 text-center'>
                                 <Elements formField={[
                                     {
-                                        id: 'noOfRooms',
+                                        id: 'numberofrooms',
                                         label: 'Number of Rooms',
                                         type: 'react_select',
                                         autoFocus: true,
                                         requiredFlag: true,
-                                        value: val.noOfRooms,
+                                        value: val.numberofrooms,
                                         options: availableRooms,
                                         valueKey: 'label',
                                         onchange: onchange
@@ -199,12 +200,12 @@ function Room(props) {
                             <div className='col-md-6 text-center'>
                                 <Elements formField={[
                                     {
-                                        id: 'noOfGuests',
+                                        id: 'numberofguests',
                                         label: 'Number of Guests',
                                         type: 'react_select',
                                         autoFocus: true,
                                         requiredFlag: true,
-                                        value: val.noOfGuests,
+                                        value: val.numberofguests,
                                         options: guestCap,
                                         valueKey: 'label',
                                         onchange: onchange
