@@ -32,7 +32,7 @@ public class HotelsController {
 //    }
 
     @GetMapping(value = "/{hotelid}")
-    public Optional<Hotels> getHotelByID(@QueryParam(value = "hotelid") Integer hotelid) {
+    public Optional<Hotels> getHotelByID(@PathVariable(value = "hotelid") Integer hotelid) {
         Map<String, Object> map = new HashMap<>();
         map.put("status", 0);
         map.put("data", hotelRepository.findById(hotelid));
@@ -49,14 +49,14 @@ public class HotelsController {
         }
         LocalDate s = start == null ? LocalDate.now() : start;
         LocalDate e = end == null ? LocalDate.now() : end;
-        List<Map<String, Object>> c = city == null ? hotelRepository.findAvailableHotelsWithoutCity(s, e)
+        List<Map<String, Object>> hotels = city == null ? hotelRepository.findAvailableHotelsWithoutCity(s, e)
                 : hotelRepository.findAvailableHotelsBycity(city,s,e);
 
 
 //        List<Map<String, Object>> c = hotelRepository.findnewhotels(city,start,end);
 //        Boolean cc = start.getDayOfWeek() == Calendar.SATURDAY || start.getDayOfWeek() == Calendar.SUNDAY;
 
-        return c;
+        return hotels;
     }
 
     @PostMapping
