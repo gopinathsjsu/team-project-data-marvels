@@ -15,10 +15,10 @@ function Header(props) {
                     <NavLink className='navbar-brand' to='/app/home'>Marvel Hotels</NavLink>
                     {/* <NavLink className='nav-link' to='/app'>Home</NavLink> */}
                     {/* <NavLink className='nav-link' to='/app/hotels'>Hotels</NavLink> */}
-                    {props.profile.userrole !== 'Customer' && <NavLink className='nav-link' to='/app/manageBooking'>Manage Reservations</NavLink>}
+                    {props.profile.userrole !== 'Customer' && <NavLink className='nav-link' to='/app/manageBooking'>Manage Booking</NavLink>}
                 </Nav>
                 <Nav className='d-flex flex-row me-4'>
-                    {props.profile.userrole !== 'Employee' && <NavLink className='nav-link' to='/app/reservations'>My Reservations</NavLink>}
+                    {props.profile.userrole !== 'Employee' && <NavLink className='nav-link' to='/app/reservations'>My Booking</NavLink>}
                     <p className='nav-item text-white-50 mb-0 mt-2'>Rewards: {props.profile.rewards}</p>
                     {/* <NavLink className='nav-link' to='/app/profile'>Profile</NavLink> */}
 
