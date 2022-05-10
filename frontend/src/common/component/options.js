@@ -13,7 +13,8 @@ const Numbers = [
 const roomStatus = [
     { label: 'Change Status', value: '0' },
     { label: 'Checked In', value: 'Checked In' },
-    { label: 'Checked Out', value: 'Checked Out' }
+    { label: 'Checked Out', value: 'Checked Out' },
+    { label: 'Cancel Reservation', value: 'Cancel Reservation' }
 ]
 
 const roomType = {

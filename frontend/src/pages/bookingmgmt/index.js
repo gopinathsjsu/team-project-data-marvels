@@ -50,9 +50,6 @@ function BookingMgmt() {
                     <div className='d-flex flex-column justify-content-center'>
                         <Button id='save' text='Save' />
                     </div>
-                    <div className='d-flex flex-column justify-content-center'>
-                        <Button id='cancel' color='danger' text='Cancel Reservation' />
-                    </div>
                 </li>
                 <li className='list-group-item d-flex flex-row justify-content-between mt-3 border-bottom-1' style={{ backgroundColor: '#E7E5EA' }}>
                     <div className='col-4 d-flex flex-column justify-content-around'>
@@ -82,9 +79,6 @@ function BookingMgmt() {
                     </div>
                     <div className='d-flex flex-column justify-content-center'>
                         <Button id='save' text='Save' />
-                    </div>
-                    <div className='d-flex flex-column justify-content-center'>
-                        <Button id='cancel' color='danger' text='Cancel Reservation' />
                     </div>
                 </li>
             </ul>
