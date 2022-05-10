@@ -26,7 +26,7 @@ function Reservations(props) {
 
     return (
         <div className='container d-flex flex-column justify-content-center p-4'>
-            <h2>My Reservations</h2>
+            <h2>My Bookings</h2>
 
             {bookings.length === 0 ? <>No Bookings</> :
                 <ul className='list-group list-group-flush mt-2'>
