@@ -31,7 +31,7 @@ function Reservations(props) {
     return (<>
         {props.data.map((item, index) => (
             <li key={index} className='list-group-item d-flex flex-row justify-content-between mt-3 border-bottom-1' style={{ backgroundColor: '#E7E5EA' }}>
-                <div className='col-4 d-flex flex-column justify-content-around'>
+                <div className='col-5 d-flex flex-column justify-content-around'>
                     <h6>Reservation No.: {item.bookingid}</h6>
                     {error !== null && <p>
                         <font color='red'>{error}</font>
@@ -51,7 +51,7 @@ function Reservations(props) {
                     <p className='mb-0'>Price: $<span>{item.roomprice}</span></p>
                     <p className='mb-0'>Status:<span>{item.status}</span></p>
                 </div>
-                <div className='d-flex flex-column justify-content-center'>
+                <div className='col-3 d-flex flex-row justify-content-around align-items-center'>
                     <Button id='cancel' text='Cancel' onClick={() => update(item.bookingid, index, 'Cancelled')} />
                     <Button id='checkin' text='Check In' onClick={() => update(item.bookingid, index, 'Checked in')} />
                     <Button id='checkout' text='Check Out' onClick={() => update(item.bookingid, index, 'Checked Out')} />
