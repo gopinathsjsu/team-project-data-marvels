@@ -1,20 +1,11 @@
-package com.example.backend.Models;
+package com.example.backend.ModelDTO;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@Entity
-public class Bookings {
-    @Id
-    @Column(name = "bookingid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer bookingid;
+public class BookingDTO {
 
     private Integer hotelid;
 
@@ -45,6 +36,4 @@ public class Bookings {
     private Boolean parking;
 
     private Boolean fitnessRoom;
-
 }
-

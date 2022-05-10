@@ -5,12 +5,10 @@ import com.example.backend.ModelDTO.SignupRequest;
 import com.example.backend.Models.Users;
 import com.example.backend.Repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -28,6 +26,7 @@ public class UsersController {
     @PostMapping("/signin")
     public ResponseEntity getUserById(@RequestBody LoginRequest user){
         Users users = usersRepository.findByUsername(user.getUsername());
+        if(users == null) return ResponseEntity.badRequest().body("Error: No user exists with this username");
         if(!user.getPassword().equals(users.getPass())){
             return ResponseEntity.badRequest().body("Error: Invalid Credentials");
         }
