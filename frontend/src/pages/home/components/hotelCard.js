@@ -8,7 +8,7 @@ function HotelCards(props) {
 
     function findHotel(hotelid) {
 
-        history.push({pathname: '/detail/' + hotelid});
+        history.push({pathname: '/app/room/' + hotelid});
 
     }
 
@@ -23,7 +23,7 @@ function HotelCards(props) {
                         <img src={logo} className='card-img' />
                         <div className='d-flex flex-row justify-content-between mt-2 mb-3'>
                             <div className='col-8 d-flex flex-column'>
-                                <h5>roomType</h5>
+                                <h5>{item.address}</h5>
                             </div>
                             <div className='d-flex align-self-center'>
                                 {/* <h4>price</h4> */}

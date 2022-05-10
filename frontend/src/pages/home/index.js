@@ -9,9 +9,9 @@ function Home() {
     const [pageLoader, setPageLoader] = useState(false);
 
     const [val, setVal] = useState({
-        city: 'San Jose',
-        startdate: '2022-05-10',
-        enddate: '2022-05-15',
+        city: 'Chennai',
+        startdate: '2022-05-09',
+        enddate: '2022-05-10',
     })
 
     const [hotelResult, setHotelResult] = useState([])
@@ -19,7 +19,7 @@ function Home() {
     useEffect(() => {
         setPageLoader(true);
         API({
-            callURL: links.get_hotels,
+            callURL: links.hotel,
             callMethod: "GET",
             callBack: (res) => {
                 if (res.status) {
@@ -42,10 +42,9 @@ function Home() {
     function search(e) {
         e.preventDefault();
         setLoading(true);
+        setPageLoader(true);
 
-        let data = {
-            ...val
-        }
+        let data = { ...val }
 
         API({
             callURL: links.hotel,
@@ -62,6 +61,7 @@ function Home() {
         })
 
         setLoading(false);
+        setPageLoader(false);
     }
     return (
         <div className='container d-flex flex-column justify-content-center p-4'>
@@ -105,9 +105,14 @@ function Home() {
                 </form>
             </div>
             {
-                pageLoader === false ? (
-                    // <div className='container d-flex flex-column justify-content-center p-4'>
+                pageLoader ? (
+                    <div className='d-flex justify-content-center'>
+                        <div className="spinner-border text-secondary" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
 
+                ) :
                     <div className='d-flex flex-row flex-wrap'>
                         {
                             hotelResult.length > 0 ?
@@ -115,11 +120,6 @@ function Home() {
                                 <> NO RESULTS</>
                         }
                     </div>
-                ) : <div className='d-flex justify-content-center'>
-                    <div className="spinner-border text-secondary" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </div>
-                </div>
             }
         </div>
     )
