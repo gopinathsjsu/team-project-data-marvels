@@ -18,7 +18,7 @@ function Header(props) {
                     {props.profile.userrole !== 'Customer' && <NavLink className='nav-link' to='/app/manageBooking'>Manage Reservations</NavLink>}
                 </Nav>
                 <Nav className='d-flex flex-row me-4'>
-                    <NavLink className='nav-link' to='/app/reservations'>My Reservations</NavLink>
+                    {props.profile.userrole !== 'Employee' && <NavLink className='nav-link' to='/app/reservations'>My Reservations</NavLink>}
                     <p className='nav-item text-white-50 mb-0 mt-2'>Rewards: {props.profile.rewards}</p>
                     {/* <NavLink className='nav-link' to='/app/profile'>Profile</NavLink> */}
 
