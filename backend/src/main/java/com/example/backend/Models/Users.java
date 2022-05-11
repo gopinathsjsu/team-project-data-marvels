@@ -27,6 +27,8 @@ public class Users {
     private String membertype;
 
     private Boolean active;
+
+    private Integer hotelid;
 }
 /*
 create table users(
