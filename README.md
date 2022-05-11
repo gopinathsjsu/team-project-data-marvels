@@ -7,6 +7,30 @@
 3. Priyanka Math
 4. Jithesh KB
 
+### Area of Contribution
+
+Yash: 
+1) Implemented UI Screens for Login, Signup and Booking features
+2) Setup of react application and integrating with backend
+
+Priyanka: 
+1) Implemented Hotels and rooms UI webpages features
+2) Designed UI wireframes
+
+Tharun:
+
+1) Implemented backend services using Springboot and Java
+2) Designed database and table scripts
+ 
+
+Jithesh
+1) Deployed backend application on EC2 instances
+2) Implemented load balancer to control the traffic 
+3) Created database cluster on Digital ocean
+
+
+
+
 ### Tools/Frameworks and Languages Used:
 
 Front End: ReactJS + Redux
