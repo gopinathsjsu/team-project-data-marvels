@@ -14,7 +14,7 @@ public interface RoomsRepository extends JpaRepository<Rooms, Integer> {
             "select r.*, b.booked from rooms r \n" +
             "left join (\n" +
             " select hotelid, roomtypeid\n" +
-            " ,sum(numberofrooms)as booked from bookings where ?2 BETWEEN startDate and endDate or ?3 BETWEEN startDate and endDate\n" +
+            " ,sum(numberofrooms)as booked from bookings where ?2 BETWEEN start_date and end_date or ?3 BETWEEN start_date and end_date\n" +
             " group by hotelid, roomtypeid) b on r.hotelid = b.hotelid and r.roomtypeid = b.roomtypeid\n" +
             ") c where hotelid = ?1", nativeQuery = true)
     List<Map<String, Object>> findAvailableRoomsByHotel(Integer hotelid, LocalDate start, LocalDate end);

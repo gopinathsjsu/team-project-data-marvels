@@ -36,4 +36,8 @@ public class BookingDTO {
     private Boolean parking;
 
     private Boolean fitnessRoom;
+
+    private Integer numberofguests;
+
+    private Integer numberofrooms;
 }

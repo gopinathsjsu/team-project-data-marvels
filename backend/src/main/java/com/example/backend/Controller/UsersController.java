@@ -54,6 +54,7 @@ public class UsersController {
         newUser.setPass(user.getPassword());
         newUser.setRewards(1000.0);
         newUser.setMembertype("Silver");
+        newUser.setHotelid(null);
         Users s = usersRepository.save(newUser);
         return ResponseEntity.ok().body("Account creation success");
     }

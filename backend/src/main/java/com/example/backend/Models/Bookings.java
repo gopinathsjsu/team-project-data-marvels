@@ -46,5 +46,9 @@ public class Bookings {
 
     private Boolean fitnessRoom;
 
+    private Integer numberofguests;
+
+    private Integer numberofrooms;
+
 }
 

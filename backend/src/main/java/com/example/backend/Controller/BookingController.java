@@ -1,6 +1,7 @@
 package com.example.backend.Controller;
 
 import com.example.backend.ModelDTO.BookingDTO;
+import com.example.backend.ModelDTO.UpdateBookingDTO;
 import com.example.backend.Models.Bookings;
 import com.example.backend.Models.Users;
 import com.example.backend.Repository.BookingsRepository;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.QueryParam;
+import java.awt.print.Book;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -23,13 +26,20 @@ public class BookingController {
     @Autowired
     UsersRepository usersRepository;
 
-    @GetMapping("/userid")
-    public List<Bookings> getBookingsByUserid(@RequestParam(value = "userid") Integer userid) {
-        return bookingsRepository.findByUserid(userid);
+    @GetMapping()
+    public List<Map<String, Object>> getBookingsByUserid(@QueryParam(value = "userid") Integer userid) {
+        return bookingsRepository.findBookingsByUserid(userid);
+    }
+
+    @GetMapping(value = "/all")
+    public List<Map<String, Object>> getBookingsByHotel(@QueryParam(value = "userid") Integer userid) {
+        Users user = usersRepository.findById(userid).get();
+        List<Map<String, Object>> bookings = bookingsRepository.findAllBookingsHotelid(user.getHotelid());
+        return bookings; // bookingsRepository.findBookingsByUserid(userid);
     }
 
     @PostMapping
-    public void saveBooking(@RequestBody BookingDTO booking) {
+    public Bookings saveBooking(@RequestBody BookingDTO booking) {
         Users user = usersRepository.findById(booking. getUserid()).get();
         Double spend = 0.0;
         Double gain = 0.0;
@@ -60,16 +70,13 @@ public class BookingController {
             else{
                 gain = booking.getRoomprice() * 7.5;
                 user.setRewards(user.getRewards() + gain);
-            } //73260, 53460, 56610 ->
+            }
 
             if(user.getRewards() > 100000) {
                 user.setMembertype("Platinum");
             }
         }
         else {
-//            spend =  booking.getRoomprice() * 100;
-//            gain = booking.getRoomprice()*2;
-
             if(booking.getPaymenttype().equals("points")) {
                 spend =  booking.getRoomprice();
                 gain = (booking.getRoomprice() / 100) * 10;
@@ -105,18 +112,23 @@ public class BookingController {
         bookings.setParking(booking.getParking());
         bookings.setMeals(booking.getMeals());
         bookings.setSwimmingpool(booking.getSwimmingpool());
+        bookings.setNumberofguests(booking.getNumberofguests());
+        bookings.setNumberofrooms(booking.getNumberofrooms());
 
-//        return bookingsRepository.save(bookings);
-    }
-
-    @PostMapping(value = "/update")
-    public Bookings updateBooking(@RequestBody Bookings bookings) {
         return bookingsRepository.save(bookings);
     }
 
+    @PostMapping(value = "/update")
+    public String updateBooking(@RequestBody UpdateBookingDTO ubDTO) {
+        Bookings bookings = bookingsRepository.findById(ubDTO.bookingid).get();
+        bookings.setStatus(ubDTO.getStatus());
+        bookingsRepository.save(bookings);
+        return ubDTO.getStatus() + " Successfully";
+    }
+
     @DeleteMapping(value = "/{bookingid}")
-    public String deleteBooking(@QueryParam(value = "bookingid") Integer bookingid) {
-        Bookings bookings = bookingsRepository.getById(bookingid);
+    public String deleteBooking(@PathVariable(value = "bookingid") Integer bookingid) {
+        Bookings bookings = bookingsRepository.findById(bookingid).get();
         bookings.setActive(false);
         bookingsRepository.save(bookings);
         return "Booking cancelled successfully";

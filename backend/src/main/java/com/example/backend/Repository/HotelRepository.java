@@ -36,11 +36,11 @@ public interface HotelRepository extends JpaRepository<Hotels, Integer> {
             "select r.*, b.booked from rooms r \n" +
             "left join (\n" +
             " select hotelid, roomtypeid\n" +
-            " ,sum(numberofrooms)as booked from bookings where '2021-08-2' BETWEEN startDate and endDate or '2021-08-18' BETWEEN startDate and endDate\n" +
+            " ,sum(numberofrooms)as booked from bookings where ?2 BETWEEN start_date and end_date or ?3 BETWEEN start_date and end_date\n" +
             " group by hotelid, roomtypeid) b on r.hotelid = b.hotelid and r.roomtypeid = b.roomtypeid\n" +
             ") c\n" +
             "join hotels h on c.hotelid = h.hotelid \n" +
-            "where city = 'chennai'\n" +
+            "where city = ?1\n" +
             "group by h.hotelid, hotelname, address, country, stars, city, state", nativeQuery = true)
     List<Map<String, Object>> findAvailableHotelsBycity(String city, LocalDate start, LocalDate end);
 
@@ -48,7 +48,7 @@ public interface HotelRepository extends JpaRepository<Hotels, Integer> {
             "select r.*, b.booked from rooms r \n" +
             "left join (\n" +
             " select hotelid, roomtypeid\n" +
-            " ,sum(numberofrooms)as booked from bookings where ?1 BETWEEN startDate and endDate or ?2 BETWEEN startDate and endDate\n" +
+            " ,sum(numberofrooms)as booked from bookings where ?1 BETWEEN start_date and end_date or ?2 BETWEEN start_date and end_date\n" +
             " group by hotelid, roomtypeid) b on r.hotelid = b.hotelid and r.roomtypeid = b.roomtypeid\n" +
             ") c\n" +
             " join hotels h on c.hotelid = h.hotelid group by h.hotelid, hotelname, address, country, stars, city, state\n", nativeQuery = true)
