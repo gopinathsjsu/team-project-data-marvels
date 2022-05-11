@@ -6,9 +6,10 @@ import { useHistory } from 'react-router-dom';
 function HotelCards(props) {
     let history = useHistory();
 
-    function findHotel(hotelid) {
+    function findHotel(hotelid, index) {
 
-        history.push({pathname: '/app/room/' + hotelid});
+        props.set_hotelData(props.data[index]);
+        history.push({pathname: '/app/hotel/' + hotelid});
 
     }
 
@@ -17,7 +18,7 @@ function HotelCards(props) {
             {
                 props.data.map((item, index) => (
                     // <div id={index} className='card shadow-sm m-3' style={{ padding: '15px', width: '330px' }}>
-                    <div key={index} className='card shadow-sm m-3 p-3'>
+                    <div key={index} className='card shadow-sm m-4 p-3'>
                         <h4 className='mb-0'>{item.hotelname}</h4>
                         <p text='City'>{item.city}</p>
                         <img src={logo} className='card-img' />
@@ -31,7 +32,7 @@ function HotelCards(props) {
                             </div>
                         </div>
                         <div className='d-flex flex-row justify-content-center'>
-                            <Button variant='outline' id='details' text='Search Hotels' onClick={() => findHotel(item.hotelid)} />
+                            <Button variant='outline' id='details' text='View Rates' onClick={() => findHotel(item.hotelid, index)} />
                         </div>
                     </div>
                 ))

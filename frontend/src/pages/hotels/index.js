@@ -20,14 +20,12 @@ function Hotels() {
     }, [])
 
     function deleteHotel(hotelid) {
-        console.log(hotelid);
 
         API({
 			callURL: links.get_hotels,
 			callMethod: "DELETE",
 			urlParams:{"hotelid": hotelid},
 			callBack: (res) => {
-				console.log(res);
 			}
 		})
     }

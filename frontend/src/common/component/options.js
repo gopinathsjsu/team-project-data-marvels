@@ -11,9 +11,22 @@ const Numbers = [
     { label: 10 },
 ]
 const roomStatus = [
-    { label: 'Change Status', value: '0' },
+    // { label: 'Booked', value: 'Booked' },
     { label: 'Checked In', value: 'Checked In' },
-    { label: 'Checked Out', value: 'Checked Out' }
+    { label: 'Checked Out', value: 'Checked Out' },
+    { label: 'Cancelled', value: 'Cancelled' }
 ]
 
-export { Numbers, roomStatus }
+const roomType = {
+    1: 'Single',
+    2: 'Double',
+    3: 'Suite'
+}
+
+const memberType = {
+    'Silver' : 150,
+    'Gold' : 125,
+    'Platinum' : 100
+}
+
+export { Numbers, roomStatus, roomType, memberType }

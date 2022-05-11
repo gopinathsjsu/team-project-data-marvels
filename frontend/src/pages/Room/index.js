@@ -15,7 +15,6 @@ function Room() {
             callURL: links.hotel_detail + "{hotelid}?hotelid=" + hotelid,
             callMethod: "GET",
             callBack: (res) => {
-                console.log(res);
             }
         })
     }, [])
@@ -44,7 +43,6 @@ function Room() {
         let data = {
             ...val
         }
-        console.log(data);
     }
 
     return (

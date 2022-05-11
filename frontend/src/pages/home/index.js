@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 import HotelCards from './components/hotelCard';
 import { Elements, Button, API, getLinks } from '../../common/index';
+import { set_hotelData, set_date } from '../../redux/dispatch/dispatch';
+import { connect } from 'react-redux';
 
-function Home() {
+function Home(props) {
     const links = getLinks();
     const [loading, setLoading] = useState(false);
     const [pageLoader, setPageLoader] = useState(false);
 
     const [val, setVal] = useState({
-        city: 'Chennai',
-        startdate: '2022-05-09',
-        enddate: '2022-05-10',
+        city: '',
+        startdate: '',
+        enddate: '',
     })
 
     const [hotelResult, setHotelResult] = useState([])
@@ -45,6 +46,12 @@ function Home() {
         setPageLoader(true);
 
         let data = { ...val }
+        let date = {
+            startDate: data.startdate,
+            endDate: data.enddate
+        }
+
+        props.set_date(date);
 
         API({
             callURL: links.hotel,
@@ -116,7 +123,7 @@ function Home() {
                     <div className='d-flex flex-row flex-wrap'>
                         {
                             hotelResult.length > 0 ?
-                                <HotelCards data={hotelResult} /> :
+                                <HotelCards data={hotelResult} set_hotelData={props.set_hotelData} /> :
                                 <> NO RESULTS</>
                         }
                     </div>
@@ -125,4 +132,15 @@ function Home() {
     )
 }
 
-export default Home
+const mapDispatchToProps = (dispatch) => {
+    return {
+        set_hotelData: (options) => {
+            dispatch(set_hotelData(options))
+        },
+        set_date: (option) => {
+            dispatch(set_date(option))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Home);

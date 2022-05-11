@@ -10,8 +10,7 @@ import Login from './component/login';
 import SignUp from './component/signup';
 
 function Auth(props) {
-
-    if (props.profile.data, props.profile.data !== undefined) return <Redirect to='/app/home' />
+    if (props.profile.userid !== undefined) return <Redirect to='/app/home' />
     return (
         <Switch>
             <Route path='/signup'>

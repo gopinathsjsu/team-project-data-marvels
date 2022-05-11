@@ -64,13 +64,13 @@ function Elements(props) {
                             max={element.max !== undefined ? element.max : null}
                             required={element.requiredFlag ? element.requiredFlag : false}
                             form={element.form !== undefined ? element.form : null}
-                            className={classnames('form-control', {
+                            className={classnames('form-control me-2', {
                                 'form-control-sm': element.size === 'sm',
                                 'form-control-lg': element.size === 'lg',
                             })}
                         />
                         {element.label ? (
-                            <label htmlFor={element.id} className='ms-2'>
+                            <label htmlFor={element.id} >
                                 {element.label}
                             </label>
                         ) : null}
@@ -164,8 +164,8 @@ function Elements(props) {
                             form={element.form ? element.form : null}
                             className={
                                 element.size !== undefined
-                                    ? 'custom-control-input ' + element.size
-                                    : 'custom-control-input'
+                                    ? 'custom-control-input me-2 ' + element.size
+                                    : 'custom-control-input me-2'
                             }
                         />
                         {element.label !== undefined ? (

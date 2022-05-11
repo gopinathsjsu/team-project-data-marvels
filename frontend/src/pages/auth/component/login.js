@@ -9,8 +9,8 @@ function Login(props) {
 	const [loading, setLoading] = useState(false);
 	const [loginError, setLoginError] = useState(null);
 	const [val, setVal] = useState({
-		username: "tharun",
-		password: "test123"
+		username: "",
+		password: ""
 	})
 
 	function onchange(newval, id) {
@@ -32,8 +32,8 @@ function Login(props) {
 			callBack: (res) => {
 				if (res.status) {
 					setLoginError(null);
-					props.set_userData(res);
-					props.set_role(res.userrole);
+					props.set_userData(res.data);
+					props.set_role(res.data.userrole);
 				}
 				else {
 					setLoginError(res.message);

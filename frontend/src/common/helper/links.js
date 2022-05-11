@@ -1,4 +1,5 @@
-const devURL = "http://localhost:8081/api/"
+// const devURL = "http://localhost:8081/api/"
+const devURL = "http://ec2-34-235-151-159.compute-1.amazonaws.com:8081/api/"
 
 const dev = {
     sign_up: devURL + "users/signup",
@@ -6,8 +7,11 @@ const dev = {
 
     get_hotels: devURL + "hotels/getHotels",
     hotel: devURL + "hotels",
-    search_hotel: devURL + "hotels/hotels",
-    hotel_detail: devURL + "hotels/"
+
+    hotel_rooms: devURL + "rooms",
+
+    book_room: devURL + "booking",
+    hotel_booking: devURL + "booking/all"
 }
 
 function getLinks() {

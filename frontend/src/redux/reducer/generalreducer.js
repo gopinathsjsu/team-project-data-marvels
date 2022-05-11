@@ -1,4 +1,3 @@
-// import generalstate from '../gvariable';
 import { generalstate } from '../gvariables'
 
 const GenralReducer = (state = generalstate, action) => {
@@ -6,16 +5,27 @@ const GenralReducer = (state = generalstate, action) => {
         case 'SET_USERDATA':
             state = {
                 ...state,
-                profile: action
+                profile: action.data
             }
             break
         case 'SET_ROLE':
             state = {
                 ...state,
-                role: action
+                role: action.data
             }
             break
-
+        case 'SET_HOTEL':
+            state = {
+                ...state,
+                hotel: action.data
+            }
+            break
+        case 'SET_DATE':
+            state = {
+                ...state,
+                date: action.data
+            }
+            break
         default:
             state = { ...state }
     }
