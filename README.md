@@ -9,7 +9,7 @@
 
 ### Tools/Frameworks and Languages Used:
 
-Front End: ReactJS
+Front End: ReactJS + Redux
 
 BackEnd: Java + SpringBoot
 
