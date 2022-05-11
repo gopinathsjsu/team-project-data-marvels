@@ -75,7 +75,12 @@ Mondays and Thrusdays
 
 4. Pair Programming : Architecture design, DB Design, Wireframes and Deployment designs were discussed and finalised on Monday syncup calls.
 
-5. Weekly Sprint: We followed one week sprint acitivity and developed the product in 7 sprints. 
+5. Weekly Sprint: We followed one week sprint acitivity and developed the product in 7 sprints.
+
+### Project Journal:
+
+[Project_Journel_DataMarvels.pdf](https://github.com/gopinathsjsu/team-project-data-marvels/files/8667126/Project_Journel_DataMarvels.pdf)
+
 
 ### Activity Diagram:
 
