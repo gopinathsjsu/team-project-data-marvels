@@ -58,6 +58,9 @@ Mondays and Thrusdays
 
 ![ActivityDiagram](https://user-images.githubusercontent.com/21059586/167760465-d9ce17b6-96d7-4946-ab38-4cbfabc1524a.jpeg)
 
+### Class Diagram:
+![ClassDiagram](https://github.com/gopinathsjsu/team-project-data-marvels/blob/main/classdiagram.PNG)
+
 ### Hotel Database Schema:
 
 ![Hotel_Database_schema](https://user-images.githubusercontent.com/21059586/167760800-b3c22148-ff02-43fc-8edc-52035ba9a6bc.jpg)
