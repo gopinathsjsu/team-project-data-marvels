@@ -13,10 +13,10 @@ function Bookings(props) {
         API({
             callURL: links.book_room + '/update',
             callMethod: 'POST',
-            bodyData: { bookingid: bookingId, status: 'Canceled' },
+            bodyData: { bookingid: bookingId, status: 'Cancelled' },
             callBack: (res) => {
                 if (res.status) {
-                    temp[index]['status'] = 'Canceled'
+                    temp[index]['status'] = 'Cancelled'
                     props.setBookings(temp);
                     setError(null)
                     setSuccess(res.data)
