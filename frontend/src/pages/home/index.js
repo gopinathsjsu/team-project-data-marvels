@@ -10,9 +10,9 @@ function Home(props) {
     const [pageLoader, setPageLoader] = useState(false);
 
     const [val, setVal] = useState({
-        city: 'Chennai',
-        startdate: '2022-05-10',
-        enddate: '2022-05-12',
+        city: '',
+        startdate: '',
+        enddate: '',
     })
 
     const [hotelResult, setHotelResult] = useState([])
