@@ -66,6 +66,10 @@ frontend: Contains frontend source code
 ### Scrum Meeting Schedule:
 Mondays and Thrusdays
 
+### Project Journal:
+
+[Project_Journel_DataMarvels.pdf](https://github.com/gopinathsjsu/team-project-data-marvels/files/8667126/Project_Journel_DataMarvels.pdf)
+
 ### XP values followed: 
 1. Communication : Communicated openly on the expectations of each stories, dependencies and implementation methods. We used to meet once in a week on  Mondays, to discuss the status, issues/blockers and what has been worked on till date. Prioritize the features which has more dependency. Highlight Blockers. 
 
@@ -76,10 +80,6 @@ Mondays and Thrusdays
 4. Pair Programming : Architecture design, DB Design, Wireframes and Deployment designs were discussed and finalised on Monday syncup calls.
 
 5. Weekly Sprint: We followed one week sprint acitivity and developed the product in 7 sprints.
-
-### Project Journal:
-
-[Project_Journel_DataMarvels.pdf](https://github.com/gopinathsjsu/team-project-data-marvels/files/8667126/Project_Journel_DataMarvels.pdf)
 
 
 ### Activity Diagram:
