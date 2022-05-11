@@ -5,12 +5,12 @@ function Hotelmodal() {
     const links = getLinks()
     const [loading, setLoading] = useState(false);
     const [val, setVal] = useState({
-        hotelname: 'XYZ',
-        address: 'Tardeo',
-        city: 'Mumbai',
-        state: 'Maharashtra',
-        country: 'India',
-        stars: 5
+        hotelname: '',
+        address: '',
+        city: '',
+        state: '',
+        country: '',
+        stars: 0
     });
 
     function onchange(newval, id) {

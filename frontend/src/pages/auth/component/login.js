@@ -9,8 +9,8 @@ function Login(props) {
 	const [loading, setLoading] = useState(false);
 	const [loginError, setLoginError] = useState(null);
 	const [val, setVal] = useState({
-		username: "tharun",
-		password: "test123"
+		username: "",
+		password: ""
 	})
 
 	function onchange(newval, id) {

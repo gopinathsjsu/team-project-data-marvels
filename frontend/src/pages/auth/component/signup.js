@@ -9,10 +9,10 @@ export default function SignUp() {
     const [loading, setLoading] = useState(false);
 
     const [val, setVal] = useState({
-        username: "Yash",
-        password: "test123",
-        phonenumber: "669204",
-        email: "yash@sjsu.edu"
+        username: "",
+        password: "",
+        phonenumber: "",
+        email: ""
     })
 
     const [errorMessage, setErrorMessage] = useState(null)
