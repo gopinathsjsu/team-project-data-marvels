@@ -30,7 +30,7 @@ function Reservations(props) {
 
             {bookings.length === 0 ? <>No Bookings</> :
                 <ul className='list-group list-group-flush mt-2'>
-                    <Bookings data={bookings} />
+                    <Bookings data={bookings} setBookings={setBookings} />
                 </ul>}
         </div>
     )
